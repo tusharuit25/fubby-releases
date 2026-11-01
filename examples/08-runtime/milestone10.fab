@@ -1,0 +1,8 @@
+func main() {
+    let n = 0
+    for i in 1..1000 {
+        n += i
+    }
+    print(n)
+    print(str_upper("runtime ok"))
+}

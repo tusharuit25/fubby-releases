@@ -1,0 +1,7 @@
+
+# Generated example runtime files
+examples/**/*.db
+examples/**/*.db-*
+examples/**/.fubby/
+examples/**/fubby.lock
+examples/**/fubby-m7-test.txt

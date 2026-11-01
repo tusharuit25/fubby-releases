@@ -1,0 +1,23 @@
+class BankAccount {
+    private String owner
+    private Float balance
+
+    init(String owner, Float openingBalance) {
+        this.owner = owner
+        this.balance = openingBalance
+    }
+
+    public func deposit(Float amount) {
+        this.balance += amount
+    }
+
+    public func getBalance() -> Float {
+        return this.balance
+    }
+}
+
+func main() {
+    let account = BankAccount("Tushar", 5000.0)
+    account.deposit(2500.0)
+    print(account.getBalance())
+}

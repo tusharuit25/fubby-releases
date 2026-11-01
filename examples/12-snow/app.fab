@@ -1,0 +1,109 @@
+/// Snow Notes: a local SQLite-backed web application.
+func main() {
+    let db = moon.db.sqlite.open("snow-notes.db", {})
+    db.execute("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, title TEXT NOT NULL)", [])
+    snow.get("/", "home")
+    snow.get("/about", "about")
+    snow.get("/hello/:name", "hello")
+    snow.get("/api/notes", "list_notes")
+    snow.post("/api/notes", "create_note")
+    snow.get("/api/notes/:id", "read_note")
+    snow.put("/api/notes/:id", "update_note")
+    snow.patch("/api/notes/:id", "update_note")
+    snow.delete("/api/notes/:id", "delete_note")
+    snow.static("/assets", "assets")
+    snow.before("request_context")
+    snow.after("response_headers")
+    snow.on_error("application_error")
+}
+
+func request_context() {
+    let request = snow.request()
+    request["state"].set("framework", "Snow")
+}
+
+func response_headers() {
+    snow.header("X-Framework", snow.request()["state"]["framework"])
+}
+
+func application_error() {
+    snow.json({"error": "The request could not be completed"}, 500)
+}
+
+func home() {
+    snow.html("<!doctype html><html><head><title>Snow Notes</title><link rel=\"stylesheet\" href=\"/assets/style.css\"></head><body><h1>Snow Notes</h1><nav><a href=\"/about\">About</a> | <a href=\"/api/notes\">Notes JSON</a></nav><form id=\"new-note\"><label>Title <input id=\"title\" maxlength=\"200\" required></label><button>Add note</button></form><p id=\"status\"></p><ul id=\"notes\"></ul><script src=\"/assets/app.js\"></script></body></html>")
+}
+
+func about() {
+    snow.html("<!doctype html><html><head><title>About Snow</title></head><body><h1>About Snow Notes</h1><p>A local Fubby application using Snow and parameterized Moon SQLite queries.</p><a href=\"/\">Home</a></body></html>")
+}
+
+func hello() {
+    let request = snow.request()
+    snow.html(snow.template("<h1>Hello, {{name}}</h1><p>Your name is HTML escaped.</p>", {"name": request["params"]["name"]}))
+}
+
+func list_notes() {
+    let db = moon.db.sqlite.open("snow-notes.db", {})
+    snow.json(db.query("SELECT id, title FROM notes ORDER BY id LIMIT 100", []))
+}
+
+func create_note() {
+    let request = snow.request()
+    try {
+        let data = json_decode(request["body"])
+        let title = data["title"]
+        if str_length(title) < 1 || str_length(title) > 200 {
+            snow.json({"error": "title must contain 1 to 200 characters"}, 400)
+            return
+        }
+        let db = moon.db.sqlite.open("snow-notes.db", {})
+        let result = db.execute("INSERT INTO notes (title) VALUES (?1)", [title])
+        snow.json({"id": result["last_insert_rowid"], "title": title}, 201)
+    } catch (err) {
+        snow.json({"error": "expected a JSON object with a String title"}, 400)
+    }
+}
+
+func read_note() {
+    let request = snow.request()
+    let db = moon.db.sqlite.open("snow-notes.db", {})
+    let rows = db.query("SELECT id, title FROM notes WHERE id = ?1", [request["params"]["id"]])
+    if rows.length() == 0 {
+        snow.json({"error": "not found"}, 404)
+    } else {
+        snow.json(rows[0])
+    }
+}
+
+func update_note() {
+    let request = snow.request()
+    try {
+        let data = json_decode(request["body"])
+        let title = data["title"]
+        if str_length(title) < 1 || str_length(title) > 200 {
+            snow.json({"error": "title must contain 1 to 200 characters"}, 400)
+            return
+        }
+        let db = moon.db.sqlite.open("snow-notes.db", {})
+        let result = db.execute("UPDATE notes SET title = ?1 WHERE id = ?2", [title, request["params"]["id"]])
+        if result["changes"] == 0 {
+            snow.json({"error": "not found"}, 404)
+        } else {
+            snow.json({"updated": true})
+        }
+    } catch (err) {
+        snow.json({"error": "expected a JSON object with a String title"}, 400)
+    }
+}
+
+func delete_note() {
+    let request = snow.request()
+    let db = moon.db.sqlite.open("snow-notes.db", {})
+    let result = db.execute("DELETE FROM notes WHERE id = ?1", [request["params"]["id"]])
+    if result["changes"] == 0 {
+        snow.json({"error": "not found"}, 404)
+    } else {
+        snow.text("", 204)
+    }
+}

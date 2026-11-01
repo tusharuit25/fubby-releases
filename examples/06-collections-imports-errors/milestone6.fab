@@ -1,0 +1,14 @@
+func main() {
+    let numbers = [10, 20, 30]
+    print(numbers[0])
+    numbers.push(40)
+    print(len(numbers))
+    print(numbers[3])
+    let total = 0
+    for n in numbers {
+        total += n
+    }
+    print(total)
+    print(numbers.pop())
+    print(numbers.length())
+}

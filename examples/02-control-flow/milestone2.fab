@@ -1,0 +1,24 @@
+func main() {
+    let String language = "Fubby"
+    let Int score = 72
+    let Float version = 0.1
+    let Bool ready = true
+
+    print(language, "version", version)
+
+    if ready && score >= 60 {
+        print("Milestone 2 is alive")
+    } else {
+        print("Not ready")
+    }
+
+    let i = 0
+    while i < 3 {
+        print("while", i)
+        i += 1
+    }
+
+    for n in 1..5 {
+        print("range", n)
+    }
+}

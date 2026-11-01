@@ -1,0 +1,14 @@
+func add(Int a, Int b) -> Int {
+    return a + b
+}
+func factorial(Int n) -> Int {
+    if n <= 1 { return 1 }
+    return n * factorial(n - 1)
+}
+func greet(String name) { print("Hello", name) }
+func main() {
+    greet("Fubby")
+    let Int total = add(20, 22)
+    print("20 + 22 =", total)
+    print("factorial 5 =", factorial(5))
+}

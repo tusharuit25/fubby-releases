@@ -1,0 +1,9 @@
+/// Normalize a user supplied title using Fubby Core string helpers.
+func preview_title(String title_text) -> String {
+    return str_trim(title_text)
+}
+
+/// Build a short greeting used by the web application's About page.
+func preview_greeting(String person_name) -> String {
+    return "Hello, " + str_trim(person_name) + "!"
+}

@@ -1,0 +1,14 @@
+/// Compute a small sum using ordinary Fubby execution.
+func sum_to(Int limit) -> Int {
+    let total = 0
+    for value in 1..limit {
+        total += value
+    }
+    return total
+}
+
+/// Entry point for Shady debug and profile demonstrations.
+func main() {
+    let total = sum_to(6)
+    print(total)
+}

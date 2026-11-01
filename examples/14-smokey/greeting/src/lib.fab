@@ -1,0 +1,5 @@
+import "package:text-util/src/lib.fab"
+
+func greeting() -> String {
+    return package_message()
+}

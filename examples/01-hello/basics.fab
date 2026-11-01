@@ -1,0 +1,8 @@
+func main() {
+    let name = "Fubby"
+    const version = 1
+    let answer = 6 * 7
+    print("Language:", name)
+    print("Version:", version)
+    print("6 * 7 =", answer)
+}

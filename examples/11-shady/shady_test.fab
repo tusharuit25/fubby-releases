@@ -1,0 +1,20 @@
+/// Tests use zero-argument Void functions and throw on failure.
+func test_arithmetic() {
+    if 2 + 2 != 4 {
+        throw "expected 2 + 2 to equal 4"
+    }
+}
+
+/// Each test receives a fresh interpreter runtime budget.
+func test_collections() {
+    let values = [1, 2, 3]
+    if values.length() != 3 {
+        throw "expected three values"
+    }
+}
+
+func main() {
+    test_arithmetic()
+    test_collections()
+    print("Shady examples passed")
+}

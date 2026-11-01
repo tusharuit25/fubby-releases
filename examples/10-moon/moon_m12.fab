@@ -1,0 +1,17 @@
+func main() {
+    let limits = moon.security.limits()
+    print(limits["http_timeout_default_ms"])
+    print(moon.security.network_allowed("example.invalid"))
+
+    let db = moon.db.sqlite.open(":memory:", {})
+    db.execute("CREATE TABLE people (id INTEGER PRIMARY KEY, name TEXT)", [])
+    db.execute("INSERT INTO people (name) VALUES (?1)", ["Ada"])
+    let rows = db.query("SELECT id, name FROM people WHERE name = ?1", ["Ada"])
+    print(rows[0]["name"])
+
+    try {
+        moon.http.get("https://example.invalid/", {})
+    } catch (err) {
+        print(str_contains(err, "network access denied"))
+    }
+}

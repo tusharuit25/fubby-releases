@@ -1,0 +1,6 @@
+import "package:preview-kit/src/lib.fab"
+
+func main() {
+    let value = preview_greeting("  Fubby developer  ")
+    print(value)
+}

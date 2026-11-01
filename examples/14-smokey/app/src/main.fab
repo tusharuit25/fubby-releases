@@ -1,0 +1,5 @@
+import "package:greeting/src/lib.fab"
+
+func main() {
+    print(greeting())
+}

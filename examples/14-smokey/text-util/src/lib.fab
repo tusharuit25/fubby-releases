@@ -1,0 +1,3 @@
+func package_message() -> String {
+    return "Smokey packages work"
+}

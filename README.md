@@ -91,6 +91,17 @@ fubby run hello.fab
 Fubby source files use UTF-8 and the `.fab` suffix. A program run with
 `fubby run` begins at a zero-argument `main` function.
 
+## Runnable example projects
+
+Follow the [15-project learning path](examples/README.md), from hello world
+through the core language, standard library, Moon, Shady, Snow, Bela, Smokey,
+and the integrated notes application. Each folder includes runnable `.fab`
+source, instructions, and expected behavior.
+
+Use **Code → Download ZIP** or clone this repository to obtain `examples/`.
+Install the M20 binary described above and put `fubby` on PATH; Rust is not
+required. Keep each project's supporting assets and package folders together.
+
 ## CLI reference
 
 The commands below were checked against the packaged `fubby --help`,

@@ -1,0 +1,19 @@
+import "package:preview-kit/src/lib.fab"
+
+func test_title_trimming() {
+    if preview_title("  field note  ") != "field note" {
+        throw "preview_title should trim surrounding whitespace"
+    }
+}
+
+func test_core_case_conversion() {
+    if str_upper(preview_title("  moon ")) != "MOON" {
+        throw "Core string conversion should compose with preview-kit"
+    }
+}
+
+func test_package_greeting() {
+    if preview_greeting(" Fubby ") != "Hello, Fubby!" {
+        throw "preview greeting should trim its name"
+    }
+}

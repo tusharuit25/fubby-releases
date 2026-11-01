@@ -1,0 +1,18 @@
+func main() {
+    print(str_upper("fubby"))
+    print(str_lower("LANGUAGE"))
+    print(str_trim("  clean  "))
+    print(str_contains("Fubby language", "language"))
+    print(str_replace("hello world", "world", "Fubby"))
+    let parts = str_split("a,b,c", ",")
+    print(parts[1])
+    print(math_abs(-12))
+    print(math_sqrt(81))
+    print(math_pow(2, 5))
+    print(math_min(7, 3))
+    print(math_max(7, 3))
+    file_write("fubby-m7-test.txt", "Milestone 7")
+    print(file_exists("fubby-m7-test.txt"))
+    print(file_read("fubby-m7-test.txt"))
+    print(clock_unix() > 0)
+}

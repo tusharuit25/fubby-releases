@@ -1,0 +1,33 @@
+interface Describable {
+    func describe() -> String
+}
+
+class Account {
+    protected String owner
+    init(String owner) {
+        this.owner = owner
+    }
+    public func describe() -> String {
+        return "Account: " + this.owner
+    }
+}
+
+class SavingsAccount extends Account implements Describable {
+    private Int balance
+    init(String owner, Int amount) {
+        this.owner = owner
+        this.balance = amount
+    }
+    public override func describe() -> String {
+        return super.describe() + " / savings"
+    }
+    public func getBalance() -> Int {
+        return this.balance
+    }
+}
+
+func main() {
+    let account = SavingsAccount("Fubby", 250)
+    print(account.describe())
+    print(account.getBalance())
+}

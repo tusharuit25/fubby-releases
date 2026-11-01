@@ -1,0 +1,15 @@
+func calculate() {
+    let input = bela.input()
+    bela.result(input["value"] * input["value"])
+}
+
+func main() {
+    let task = bela.spawn("calculate", {"value": 12})
+    print(bela.status(task))
+    print(bela.join(task))
+
+    let channel = bela.channel(2)
+    bela.send(channel, "ready")
+    print(bela.recv(channel))
+    bela.close(channel)
+}

@@ -1,0 +1,20 @@
+import "m6_library.fab"
+func main() {
+    let data = {"name": "Fubby", "version": 6}
+    print(data["name"])
+    print(data.get("version"))
+    data.set("status", "ready")
+    print(data.has("status"))
+    print(data.length())
+    print(greet())
+    try {
+        throw "test exception"
+    } catch (err) {
+        print(err)
+    }
+    try {
+        print(data["missing"])
+    } catch (err) {
+        print("caught missing key")
+    }
+}

@@ -1,0 +1,153 @@
+import "package:preview-kit/src/lib.fab"
+
+func main() {
+    let db = moon.db.sqlite.open("preview.db", {})
+    db.execute("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, title TEXT NOT NULL)", [])
+    snow.get("/", "home")
+    snow.get("/about", "about")
+    snow.get("/runtime", "runtime_page")
+    snow.get("/api/notes", "list_notes")
+    snow.post("/api/notes", "create_note")
+    snow.get("/api/notes/:id", "read_note")
+    snow.patch("/api/notes/:id", "update_note")
+    snow.delete("/api/notes/:id", "delete_note")
+    snow.get("/api/probe/:token", "request_probe")
+    snow.get("/api/upstream", "upstream_probe")
+    snow.static("/assets", "../assets")
+    snow.before("request_context")
+    snow.after("response_headers")
+    snow.on_error("application_error")
+}
+
+func request_context() {
+    let request = snow.request()
+    request["state"].set("preview", "Milestone 17")
+}
+
+func response_headers() {
+    snow.header("X-Fubby-Preview", snow.request()["state"]["preview"])
+}
+
+func application_error() {
+    snow.json({"error": "The preview request failed safely"}, 500)
+}
+
+func normalize_in_worker() {
+    let input = bela.input()
+    let normalized = preview_title(input["title"])
+    bela.send(input["channel"], normalized)
+    bela.result({"title": normalized})
+}
+
+func mirror_request() {
+    let input = bela.input()
+    bela.result({"token": input["token"], "greeting": preview_greeting(input["token"])})
+}
+
+func home() {
+    snow.html("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Fubby Preview</title><link rel=\"stylesheet\" href=\"/assets/style.css\"></head><body><header><p class=\"eyebrow\">INTEGRATED DEVELOPER PREVIEW</p><h1>Fubby Fieldnotes</h1><nav><a href=\"/\">Notes</a><a href=\"/about\">About</a><a href=\"/runtime\">Runtime</a><a href=\"/api/notes\">REST API</a></nav></header><main><section class=\"intro\"><h2>Capture the small discoveries.</h2><p>A local-first notes application built with Fubby Core, Snow, Moon, Bela and Smokey.</p></section><section class=\"panel\"><h2>New note</h2><form id=\"new-note\"><label for=\"title\">Title</label><input id=\"title\" maxlength=\"200\" required placeholder=\"A thought worth keeping\"><button type=\"submit\">Save note</button></form><p id=\"status\" role=\"status\"></p></section><section><h2>Your notes</h2><ul id=\"notes\"></ul></section></main><footer>Developer preview · data stays in a local SQLite file</footer><script src=\"/assets/app.js\"></script></body></html>")
+}
+
+func about() {
+    snow.html("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>About · Fubby Fieldnotes</title><link rel=\"stylesheet\" href=\"/assets/style.css\"></head><body><header><p class=\"eyebrow\">THE STACK</p><h1>One small app, the whole preview.</h1><nav><a href=\"/\">Notes</a><a href=\"/runtime\">Runtime</a></nav></header><main><section class=\"panel\"><h2>Reusable package</h2><p>" + preview_greeting("developer") + " The <code>preview-kit</code> path package is installed by Smokey.</p><p>Snow serves pages and JSON, Moon binds SQLite values, and Bela runs a request-scoped title task. Static assets are served from this app.</p></section></main><footer>Fubby · local developer preview</footer></body></html>")
+}
+
+func runtime_page() {
+    snow.html("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Runtime · Fubby Fieldnotes</title><link rel=\"stylesheet\" href=\"/assets/style.css\"></head><body><header><p class=\"eyebrow\">RUNTIME TOUR</p><h1>Bounded work, isolated requests.</h1><nav><a href=\"/\">Notes</a><a href=\"/about\">About</a></nav></header><main><section class=\"panel\"><h2>Try a request probe</h2><p>Each probe carries a unique token through a Bela worker and returns it with a package-generated greeting.</p><p><code>/api/probe/your-token</code></p><h2>Moon HTTP</h2><p><a href=\"/api/upstream\">Run the allowlisted localhost upstream diagnostic</a>. Without an allowlisted mock listener this reports a handled connection error.</p></section></main><footer>Four Snow workers · bounded queue · cooperative Bela tasks</footer></body></html>")
+}
+
+func list_notes() {
+    let db = moon.db.sqlite.open("preview.db", {})
+    snow.json(db.query("SELECT id, title FROM notes ORDER BY id LIMIT 100", []))
+}
+
+func create_note() {
+    let request = snow.request()
+    try {
+        let data = json_decode(request["body"])
+        let title = data["title"]
+        if str_length(title) < 1 || str_length(title) > 200 {
+            snow.json({"error": "title must contain 1 to 200 characters"}, 400)
+            return
+        }
+        let channel = bela.channel(1)
+        let task = bela.spawn("normalize_in_worker", {"title": title, "channel": channel})
+        let normalized = bela.recv(channel)
+        bela.close(channel)
+        let result = bela.join(task)
+        if normalized != result["title"] {
+            throw "Bela channel and task result differed"
+        }
+        let db = moon.db.sqlite.open("preview.db", {})
+        let inserted = db.execute("INSERT INTO notes (title) VALUES (?1)", [result["title"]])
+        snow.json({"id": inserted["last_insert_rowid"], "title": result["title"]}, 201)
+    } catch (err) {
+        snow.json({"error": "expected a valid note title"}, 400)
+    }
+}
+
+func read_note() {
+    let request = snow.request()
+    let db = moon.db.sqlite.open("preview.db", {})
+    let rows = db.query("SELECT id, title FROM notes WHERE id = ?1", [request["params"]["id"]])
+    if rows.length() == 0 {
+        snow.json({"error": "not found"}, 404)
+    } else {
+        snow.json(rows[0])
+    }
+}
+
+func update_note() {
+    let request = snow.request()
+    try {
+        let data = json_decode(request["body"])
+        let title = data["title"]
+        if str_length(title) < 1 || str_length(title) > 200 {
+            snow.json({"error": "title must contain 1 to 200 characters"}, 400)
+            return
+        }
+        let channel = bela.channel(1)
+        let task = bela.spawn("normalize_in_worker", {"title": title, "channel": channel})
+        let normalized = bela.recv(channel)
+        bela.close(channel)
+        let result = bela.join(task)
+        if normalized != result["title"] {
+            throw "Bela channel and task result differed"
+        }
+        let db = moon.db.sqlite.open("preview.db", {})
+        let updated = db.execute("UPDATE notes SET title = ?1 WHERE id = ?2", [result["title"], request["params"]["id"]])
+        if updated["changes"] == 0 {
+            snow.json({"error": "not found"}, 404)
+        } else {
+            snow.json({"updated": true})
+        }
+    } catch (err) {
+        snow.json({"error": "expected a valid note title"}, 400)
+    }
+}
+
+func delete_note() {
+    let request = snow.request()
+    let db = moon.db.sqlite.open("preview.db", {})
+    let result = db.execute("DELETE FROM notes WHERE id = ?1", [request["params"]["id"]])
+    if result["changes"] == 0 {
+        snow.json({"error": "not found"}, 404)
+    } else {
+        snow.text("", 204)
+    }
+}
+
+func request_probe() {
+    let token = snow.request()["params"]["token"]
+    let task = bela.spawn("mirror_request", {"token": token})
+    snow.json(bela.join(task))
+}
+
+func upstream_probe() {
+    try {
+        let response = moon.http.get("http://127.0.0.1:1/preview", {"timeout_ms": 500, "max_bytes": 4096})
+        snow.json({"status": response["status"], "body": response["body"]})
+    } catch (err) {
+        snow.json({"error": "localhost upstream unavailable or denied"}, 502)
+    }
+}
