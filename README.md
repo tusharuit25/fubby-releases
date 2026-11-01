@@ -1,9 +1,10 @@
-# Fubby 0.1.0 private developer preview
+# Fubby 0.1.1 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
-Fubby is a small programming language and runtime with a Core library and
-preview tooling for local applications. This download is the **Fubby 0.1.0
+Fubby is an all-in-one programming language: one program includes the language,
+a web server, a SQLite database, a test runner, a formatter, a linter, and a
+package manager. This download is the **Fubby 0.1.1
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
@@ -22,31 +23,61 @@ Rust implementation source.
 | Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
 | Windows | Unsupported. |
 
-Fubby is currently version `0.1.0`; language syntax, CLI behavior, and APIs may
+Fubby is currently version `0.1.1`; language syntax, CLI behavior, and APIs may
 change during the 0.x preview. The separate physical-machine acceptance test
 and owner approval of proprietary evaluation/redistribution terms are pending.
 Do not redistribute this binary without explicit written authorization from
 the rights holder. See the ownership and licensing section below.
 
+## What's new in 0.1.1
+
+- **Mistakes found before a program runs.** `fubby check` now reports undefined
+  names, wrong arguments, certain type mismatches, and unknown members with
+  their line and column. `fubby run` applies the same checks first.
+- **New language features:** `break`, `continue`, `match`, `null` with optional
+  types such as `String?`, the `List`, `Map`, and `Any` types, `list[0] = x`,
+  `map["k"] = x`, and trailing commas.
+- **Bugs fixed:** `let` now works inside loops. Functions can take lists and
+  maps, classes can hold other objects, and interfaces work as types. Names can
+  use Indian scripts, such as `नमस्ते`.
+- **Fewer crashes:** deeply nested code and values, lists that contain
+  themselves, and closed output pipes now end with a clear result. Uncaught
+  runtime errors name their file and line.
+
+**Upgrading from 0.1.0 can break existing programs:**
+
+- `break`, `continue`, `match`, `case`, and `null` are now reserved words.
+- A variable declared in a block no longer exists after that block.
+- A `for` variable no longer exists after its loop, and can't reuse a name that
+  is still in scope.
+- `list_remove` returns a new list without the item. It used to return the item
+  and leave the list unchanged.
+- `fubby run` refuses a program with a checker error, even on a line that would
+  never have run.
+- `main` must take no parameters and return nothing.
+- A child class can't read a parent's private member; declare it `protected`.
+
+The earlier `fubby-0.1.0-x86_64-apple-darwin.tar.gz` stays in this repository
+for reference (SHA-256 `505c61cfa826764a4eb127acff5cacb2d8b9d67805bd0210bb965764bb52a670`).
+
 ## Download and verify
 
-The archive file in this repository is:
+The current archive file in this repository is:
 
 ```text
-fubby-0.1.0-x86_64-apple-darwin.tar.gz
+fubby-0.1.1-x86_64-apple-darwin.tar.gz
 ```
 
-Download that file from the repository's file list to a private local
-directory. Before extraction, compute SHA-256 on macOS:
+Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.1.0-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.1.1-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-505c61cfa826764a4eb127acff5cacb2d8b9d67805bd0210bb965764bb52a670
+4b297143d31188ccadd8c99f2f1d0da18da8e1de894b865c7727d41510df6301
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -59,8 +90,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.1.0-x86_64-apple-darwin.tar.gz
-cd fubby-0.1.0-x86_64-apple-darwin
+tar -xzf fubby-0.1.1-x86_64-apple-darwin.tar.gz
+cd fubby-0.1.1-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -81,7 +112,7 @@ func main() {
 }
 ```
 
-Run and syntax-check it:
+Check it for mistakes, then run it:
 
 ```sh
 fubby check hello.fab
@@ -99,7 +130,7 @@ and the integrated notes application. Each folder includes runnable `.fab`
 source, instructions, and expected behavior.
 
 Use **Code → Download ZIP** or clone this repository to obtain `examples/`.
-Install the M20 binary described above and put `fubby` on PATH; Rust is not
+Install the binary described above and put `fubby` on PATH; Rust is not
 required. Keep each project's supporting assets and package folders together.
 
 ## CLI reference
@@ -206,11 +237,50 @@ func main() {
 }
 ```
 
-The language supports `let` bindings, `const` bindings, optional type
-annotations, `if`/`else`, `while`, `for name in collection`, `return`, and
-functions. Types include `Int`, `Float`, `Bool`, `String`, `Void`, and declared
-object types. Operators include `+ - * / %`, comparisons, `&&`, `||`, unary
+The language supports `let` bindings, `const` bindings, type annotations written
+before the name (`let Int count = 1`), `if`/`else`, `while`, `for name in
+collection`, `break`, `continue`, `match`, `return`, and functions. A variable
+declared in a block ends with that block. Types include `Int`, `Float`, `Bool`,
+`String`, `List`, `Map`, `Any`, and declared classes and interfaces. Operators include `+ - * / %`, comparisons, `&&`, `||`, unary
 `!`, and compound assignments. `+` also concatenates strings.
+
+### Loops and match
+
+```fubby
+func kind(Int day) -> String {
+    match day {
+        case 6, 7 { return "weekend" }
+        else { return "weekday" }
+    }
+}
+
+func main() {
+    for day in 1..7 {
+        if day == 2 { continue }
+        if day == 7 { break }
+        let label = kind(day)
+        print(label)
+    }
+}
+```
+
+`match` runs the first arm with an equal value. Arms never fall through.
+
+### Null and optional types
+
+A type holds `null` only if it ends in `?`. A plain `String` can never be null,
+and `null` can't be used with `+`, so check for it first:
+
+```fubby
+func main() {
+    let String? nickname = null
+    if nickname == null {
+        print("no nickname")
+    }
+    nickname = "Ash"
+    print(nickname)
+}
+```
 
 ### Collections
 
@@ -225,12 +295,23 @@ func main() {
     print(note["title"])
     print(list_contains(colors, "blue"))
     print(map_keys(note))
+    colors[0] = "red"
+    note["public"] = true
+    print(colors, note)
+}
+
+func total(List scores) -> Int {
+    let sum = 0
+    for score in scores {
+        sum += score
+    }
+    return sum
 }
 ```
 
-Lists use integer indexes; maps use string keys. The standard helpers provide
-bounded list/map operations. Collection values are mutable through indexed or
-member assignment where supported.
+Lists use integer indexes; maps use string keys. Both can be assigned through an
+index. Use the `List` and `Map` types to pass them to functions. The standard
+helpers provide bounded list/map operations.
 
 ### Classes, inheritance, and interfaces
 
@@ -261,8 +342,11 @@ func main() {
 ```
 
 Classes support fields, `init`, methods, visibility modifiers, inheritance,
-interfaces, `this`, `super`, abstract declarations, and `override`. See the
-packaged starter and examples for working class/interface combinations.
+interfaces, `this`, `super`, abstract declarations, and `override`. Interfaces
+can be used as types. Members are private unless marked `public` or `protected`.
+A field of a class type must be set in the constructor, or declared optional,
+such as `Dog? pet`. See the packaged starter and examples for working
+class/interface combinations.
 
 ### Exceptions
 
@@ -317,7 +401,7 @@ The currently implemented built-ins include:
   `math_min`, `math_max`, `math_sin`, `math_cos`, `math_tan`, `math_log`,
   `math_exp`, `math_round`, `math_trunc`.
 - Collections: `list_contains`, `list_index_of`, `list_reverse`, `list_slice`,
-  `list_concat`, `list_insert`, `list_remove`, `map_keys`, `map_values`.
+  `list_concat`, `list_insert`, `list_remove`, `map_keys`, `map_values`, `len`.
 - Data: `json_encode`, `json_decode`, `encoding_hex_encode`,
   `encoding_hex_decode`, `encoding_base64_encode`,
   `encoding_base64_decode`.
@@ -501,7 +585,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.1.0-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.1.1-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -540,9 +624,9 @@ established. Do not bypass macOS security prompts for untrusted artifacts.
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.1.0-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.1.1-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.1.0-x86_64-apple-darwin/starter-project
+  fubby-0.1.1-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary starter copy and local loopback server; it does not replace
@@ -551,7 +635,7 @@ the pending separate physical clean-machine test.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.1.0-x86_64-apple-darwin
+cd fubby-0.1.1-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -571,7 +655,7 @@ their own applicable notices and licenses.
 
 ## Version compatibility
 
-This binary is Fubby `0.1.0` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
+This binary is Fubby `0.1.1` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
 starter includes `.fab` examples and a local path package. Minimum supported
