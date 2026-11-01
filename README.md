@@ -1,5 +1,7 @@
 # Fubby 0.1.0 private developer preview
 
+![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
+
 Fubby is a small programming language and runtime with a Core library and
 preview tooling for local applications. This download is the **Fubby 0.1.0
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
