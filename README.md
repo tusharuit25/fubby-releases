@@ -971,6 +971,9 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 
 ## Security considerations and limitations
 
+- **It isn't safe on the internet yet.** Snow has no login, sessions, or CSRF
+  protection, the random numbers aren't secure, there's no sandbox, and there's been
+  no security audit.
 - Do not run untrusted Fubby source or packages.
 - There is no OS-level sandbox or hard OS heap quota.
 - Snow has no TLS or authentication/authorization; do not expose it to
