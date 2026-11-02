@@ -1,0 +1,99 @@
+FUBBY SOFTWARE LICENSE
+
+Copyright (c) 2026 Twig Software Solutions Pvt. Ltd. All rights reserved.
+
+This license is between you and Twig Software Solutions Pvt. Ltd. ("Twig"). By
+installing or using the Software, you accept it. If you use the Software for an
+organization, you accept it for that organization too.
+
+"Software" means the fubby program and the documentation supplied with it, in
+this version and in any earlier preview version you already have.
+
+
+1. WHAT YOU MAY DO
+
+Twig grants you a free, worldwide, non-exclusive license to:
+
+  a. install and run the Software, for any purpose, including learning, teaching,
+     research, personal projects, and business use;
+  b. keep copies of the Software, including backups;
+  c. give unmodified copies of the Software to other people, and include it
+     with applications you distribute, as long as this license and the file
+     THIRD_PARTY_NOTICES.txt stay with it.
+
+This license continues for as long as you follow it. If Twig stops supporting
+Fubby, your license for the versions you already have continues.
+
+
+2. YOUR PROGRAMS ARE YOURS
+
+You own the programs you write in the Fubby language, and the output of the
+Software. Twig claims no rights in them, and they don't have to be distributed
+under this license. You may sell them and license them however you choose.
+
+
+3. WHAT YOU MAY NOT DO
+
+Without Twig's written permission, you may not:
+
+  a. sell or charge for the Software itself, although you may charge for your own
+     programs and services, including applications that include the Software;
+  b. offer the Software as a hosted service whose main purpose is to let others
+     run their own Fubby programs;
+  c. modify the Software, or distribute a modified copy;
+  d. remove or change its copyright or license notices;
+  e. reverse engineer, decompile, or disassemble the Software, except where the
+     law gives you a right to do so that can't be waived;
+  f. use the Fubby name or paw logo in a way that suggests Twig made or endorses
+     your work. You may truthfully say that your program is written in Fubby.
+
+Twig keeps all rights it doesn't expressly grant here, including all rights in
+the Software's source code. This license doesn't grant access to that source
+code. The Fubby name and paw logo are not licensed by it.
+
+
+4. OTHER MATERIALS
+
+  - The example projects and starter project come with their own MIT license.
+    Their LICENSE file applies to them.
+  - Third-party components stay under their own licenses, listed in
+    THIRD_PARTY_NOTICES.txt. Nothing here limits your rights under those.
+  - The Fubby website and textbook are not covered by this license. All rights
+    in them are reserved.
+
+
+5. PREVIEW SOFTWARE: NO WARRANTY
+
+The Software is an experimental developer preview. It can change or break, and
+it isn't intended for production use. It isn't a security sandbox, so don't use
+it to run programs you don't trust.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, AND NON-INFRINGEMENT, TO THE EXTENT THE LAW ALLOWS.
+
+
+6. LIMIT OF LIABILITY
+
+TO THE EXTENT THE LAW ALLOWS, TWIG IS NOT LIABLE FOR ANY INDIRECT, INCIDENTAL,
+SPECIAL, OR CONSEQUENTIAL DAMAGES, OR FOR LOST PROFITS, DATA, OR BUSINESS, ARISING
+FROM THE SOFTWARE OR THIS LICENSE. TWIG'S TOTAL LIABILITY IS LIMITED TO THE AMOUNT
+YOU PAID FOR THE SOFTWARE, IF ANY. Rights that the law doesn't allow to be limited
+are not affected.
+
+
+7. ENDING THIS LICENSE
+
+If you break this license, Twig may end it by notifying you, unless you fix the
+problem within 30 days of that notice. When it ends, stop using and distributing
+the Software. Your rights in your own programs are not affected, and sections 2,
+5, 6, and 8 continue.
+
+
+8. GENERAL
+
+You're responsible for complying with export laws and other laws that apply to
+your use of the Software. If you send Twig feedback, Twig may use it freely. This
+license is governed by the laws of India. If part of it can't be enforced, the
+rest still applies. Twig may offer later versions under different terms, which
+doesn't change this license for versions you already have.

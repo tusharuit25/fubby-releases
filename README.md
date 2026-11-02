@@ -1,10 +1,10 @@
-# Fubby 0.1.1 developer preview
+# Fubby 0.1.2 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
 Fubby is an all-in-one programming language: one program includes the language,
 a web server, a SQLite database, a test runner, a formatter, a linter, and a
-package manager. This download is the **Fubby 0.1.1
+package manager. This download is the **Fubby 0.1.2
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
@@ -23,11 +23,15 @@ Rust implementation source.
 | Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
 | Windows | Unsupported. |
 
-Fubby is currently version `0.1.1`; language syntax, CLI behavior, and APIs may
-change during the 0.x preview. The separate physical-machine acceptance test
-and owner approval of proprietary evaluation/redistribution terms are pending.
-Do not redistribute this binary without explicit written authorization from
-the rights holder. See the ownership and licensing section below.
+Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
+change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
+under the [Fubby Software License](LICENSE.txt); see the license section below.
+
+## What's new in 0.1.2
+
+Fubby now has a license: free to use, including for business. See the license
+section below. The archive includes the license and third-party notices. The
+language is the same as 0.1.1.
 
 ## What's new in 0.1.1
 
@@ -57,27 +61,24 @@ the rights holder. See the ownership and licensing section below.
 - `main` must take no parameters and return nothing.
 - A child class can't read a parent's private member; declare it `protected`.
 
-The earlier `fubby-0.1.0-x86_64-apple-darwin.tar.gz` stays in this repository
-for reference (SHA-256 `505c61cfa826764a4eb127acff5cacb2d8b9d67805bd0210bb965764bb52a670`).
-
 ## Download and verify
 
-The current archive file in this repository is:
+The archive file in this repository is:
 
 ```text
-fubby-0.1.1-x86_64-apple-darwin.tar.gz
+fubby-0.1.2-x86_64-apple-darwin.tar.gz
 ```
 
 Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.1.1-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.1.2-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-4b297143d31188ccadd8c99f2f1d0da18da8e1de894b865c7727d41510df6301
+ce07e793ed824019183c9be42a2126a74aa5746ac5afa0d79ef7fa530473d077
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -90,8 +91,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.1.1-x86_64-apple-darwin.tar.gz
-cd fubby-0.1.1-x86_64-apple-darwin
+tar -xzf fubby-0.1.2-x86_64-apple-darwin.tar.gz
+cd fubby-0.1.2-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -101,6 +102,12 @@ The packaged binary reports target, build profile, and Rust compiler metadata.
 If macOS reports that the unsigned binary cannot be verified, do not bypass
 Gatekeeper unless the artifact's provenance and authorization have been
 independently approved. No notarization is provided.
+
+By installing Fubby, you accept the [Fubby Software License](LICENSE.txt).
+
+For Visual Studio Code, install the
+[Fubby plugin](https://marketplace.visualstudio.com/items?itemName=twigsoftware.fubby).
+Read more on the [Fubby website](https://fubby.twigsoftwares.com).
 
 ## Hello World and running `.fab` files
 
@@ -585,7 +592,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.1.1-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.1.2-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -624,9 +631,9 @@ established. Do not bypass macOS security prompts for untrusted artifacts.
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.1.1-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.1.2-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.1.1-x86_64-apple-darwin/starter-project
+  fubby-0.1.2-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary starter copy and local loopback server; it does not replace
@@ -635,7 +642,7 @@ the pending separate physical clean-machine test.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.1.1-x86_64-apple-darwin
+cd fubby-0.1.2-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -643,19 +650,28 @@ For a custom install prefix, pass the same `--prefix "$HOME/tools"` to both
 installer and uninstaller. The script removes `bin/fubby`, not user projects
 or application data.
 
-## Proprietary ownership and licensing status
+## License
 
-Fubby is being prepared as proprietary software. The rights holder has not yet
-approved the private evaluation license or redistribution terms. This README
-does not grant a license, evaluation right, redistribution right, or permission
-to transfer the archive. No open-source license is claimed. Do not redistribute
-or sublicense the binary unless the rights holder gives explicit written
-authorization under approved terms. Third-party components remain subject to
-their own applicable notices and licenses.
+Fubby is proprietary software. Copyright (c) 2026 Twig Software Solutions Pvt.
+Ltd. This is a summary, and the [Fubby Software License](LICENSE.txt) is what applies.
+
+- **You may** use Fubby for free for any purpose, including business. You own the
+  programs you write, and can sell them. You may give unmodified copies to others
+  and ship them with your apps.
+- **You may not** sell Fubby itself, modify and redistribute it, offer it as a
+  service for running other people's programs, or suggest that Twig endorses your
+  work.
+- **The examples** in `examples/` and the bundled starter project are under the
+  [MIT license](examples/LICENSE).
+- **Third-party components** stay under their own licenses, listed in
+  [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
+- **The textbook** is all rights reserved.
+
+Fubby comes with no warranty. The interpreter's source code isn't public.
 
 ## Version compatibility
 
-This binary is Fubby `0.1.1` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
+This binary is Fubby `0.1.2` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
 starter includes `.fab` examples and a local path package. Minimum supported
