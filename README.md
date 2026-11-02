@@ -21,15 +21,15 @@ Rust implementation source.
 
 | Platform | Status |
 | --- | --- |
-| macOS Intel (`x86_64-apple-darwin`) | Locally verified on an Intel macOS build host. A separate physical clean-machine test is still pending. |
+| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.2.** Tested on a real Intel Mac. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
 | Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.3.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux-013). |
 | Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
 | Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.3 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
-Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
-change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
-under the [Fubby Software License](LICENSE.txt); see the license section below.
+Fubby is currently version `0.1.2` on macOS, and `0.1.3` on Linux and Windows.
+Language syntax, CLI behavior, and APIs may change during the 0.x preview. Fubby is
+free to use under the [Fubby Software License](LICENSE.txt); see the license section below.
 
 ## Linux (0.1.3)
 
@@ -735,7 +735,6 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 - Apple Silicon and Linux ARM64 have no download yet. Linux x86-64 was tested on
   Ubuntu 24.04 only. Windows is a new beta, so expect some bugs and please report
   them.
-- A separate physical clean-machine test remains pending.
 
 ## Troubleshooting and uninstall
 
@@ -752,8 +751,7 @@ python3 fubby-0.1.2-x86_64-apple-darwin/smoke_test.py \
   fubby-0.1.2-x86_64-apple-darwin/starter-project
 ```
 
-It uses a temporary starter copy and local loopback server; it does not replace
-the pending separate physical clean-machine test.
+It uses a temporary copy of the starter project and a local loopback server.
 
 To uninstall only the installed executable:
 
