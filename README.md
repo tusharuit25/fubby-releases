@@ -130,6 +130,46 @@ projects.
 - the output of `fubby --version`
 - the command you ran, and what happened
 
+## Performance compared with Python
+
+We ran the same eight programs in Fubby 0.1.4 and Python 3.14, and checked that both
+printed exactly the same output. Each time is the median of 5 runs on an Intel Core i5
+MacBook Pro, and includes starting the program.
+
+| Program | What it does | Fubby | Python | Fubby is |
+| --- | --- | ---: | ---: | --- |
+| Strings | Build a 130 KB string with 20,000 appends | 28 ms | 130 ms | 4.6× faster |
+| SQLite | Insert 20,000 rows, then sum them | 126 ms | 84 ms | 1.5× slower |
+| Maps | Insert 50,000 keys, then look each one up | 110 ms | 70 ms | 1.6× slower |
+| Lists | Add 90,000 items, then read each one | 99 ms | 54 ms | 1.8× slower |
+| Loops | 3,000,000 rounds of arithmetic | 1,218 ms | 455 ms | 2.7× slower |
+| JSON | Encode and decode 1,000 rows, 200 times | 766 ms | 275 ms | 2.8× slower |
+| Function calls | Recursive `fib(25)`, about 243,000 calls | 192 ms | 44 ms | 4.4× slower |
+| Objects | Create 400,000 objects and call methods on them | 1,807 ms | 108 ms | 16.8× slower |
+
+Fubby starts in about 5 ms and Python in about 35 ms, which helps Fubby on short
+programs. Python's JSON module is written in C.
+
+**Web server.** With 4 workers, Snow answered a small JSON request 3,381 times a
+second, against 3,065 for Python's standard-library threading server, which isn't a
+production server. Snow's slowest 1% of requests took 3.9 ms, against 32 ms for
+Python. In a 20-minute test through JSON and SQLite, Snow served 934,642 requests with
+no errors, and its memory stayed flat at about 6 MB.
+
+### Closing the gap
+
+We're working on closing these gaps. The next release makes objects 2.6 times faster,
+to about 6 to 7 times slower than Python. It also makes lists 1.7 times faster, and
+function calls and loops 1.3 times faster. These are measured, but not released yet.
+
+After that, we're working on:
+
+- fewer memory allocations for each function call and each object
+- reading each operator once, instead of comparing its text every time it runs
+- sharing strings instead of copying them every time they're read
+
+We'll publish new numbers with every release.
+
 ## What's new in 0.1.4
 
 Fixes found by new benchmarks against Python. The language is the same as 0.1.3,
