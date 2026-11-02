@@ -8,7 +8,8 @@ package manager. This download is the **Fubby 0.1.2
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
-A **Windows beta (0.1.3)** is also available. See [Windows beta](#windows-beta-013).
+**Fubby is now available for Windows.** Download the 0.1.3 beta from the
+[Windows beta](#windows-beta-013) section.
 
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
@@ -23,7 +24,7 @@ Rust implementation source.
 | macOS Intel (`x86_64-apple-darwin`) | Locally verified on an Intel macOS build host. A separate physical clean-machine test is still pending. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
 | Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
-| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Beta (0.1.3).** Built on a Mac and not yet run on a real Windows PC. Download it from the [`windows-beta`](windows-beta/) folder. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.3 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
 Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
 change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
@@ -31,9 +32,9 @@ under the [Fubby Software License](LICENSE.txt); see the license section below.
 
 ## Windows beta (0.1.3)
 
-Fubby 0.1.3 for Windows is a **beta**. It was built on a Mac for 64-bit Windows,
-and nobody had run it on a real Windows PC when it was published. Some things may
-not work. Please try it and [report what you find](#report-a-windows-problem).
+Fubby 0.1.3 for Windows is out now, as a **beta**. It's brand new, so you may be
+one of the first people to run it, and you may hit bugs. When you do, please
+[report them](#report-a-windows-problem), so they can be fixed in the next release.
 
 - Needs Windows 10 or later, on an x86-64 (Intel or AMD) PC.
 - Comes as a zip file with a PowerShell installer that doesn't need administrator
@@ -693,8 +694,8 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 - Binaries are not signed or notarized; independent build provenance is not
   provided.
 - Smokey registries are local only; publisher authentication is absent.
-- Apple Silicon and Linux are unverified. Windows is a beta that hadn't been run on a
-  real Windows PC when it was published.
+- Apple Silicon and Linux are unverified. Windows is a new beta, so expect some bugs
+  and please report them.
 - A separate physical clean-machine test remains pending.
 
 ## Troubleshooting and uninstall

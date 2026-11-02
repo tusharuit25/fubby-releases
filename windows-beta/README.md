@@ -1,7 +1,8 @@
 # Fubby 0.1.3 Windows beta
 
-**This is a beta.** It was built on a Mac for 64-bit Windows, and nobody had run it
-on a real Windows PC when it was published. Some things may not work.
+**Fubby for Windows is here, as a beta.** It's brand new, so you may be one of the
+first people to run it, and you may hit bugs. Please report them, so they can be
+fixed in the next release.
 
 - `fubby-0.1.3-x86_64-pc-windows-gnu.zip` is the download. It needs Windows 10 or
   later on an x86-64 PC, and isn't signed, so SmartScreen may warn you.
