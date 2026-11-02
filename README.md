@@ -332,6 +332,193 @@ Options:
 Defaults are `127.0.0.1:8080` and serial request handling. Snow is an
 experimental local development server.
 
+## Keywords
+
+Fubby has 32 keywords. They are reserved, so you can't use them as names for
+variables, functions, classes, or anything else. Type names such as `Int`,
+`String`, `List`, and `Any`, and the built-in roots `moon`, `snow`, and `bela`,
+are not keywords.
+
+### Declarations
+
+| Keyword | What it does | Example |
+| --- | --- | --- |
+| `func` | Declares a function or method. A program starts at `main`. | `func add(Int a, Int b) -> Int { return a + b }` |
+| `let` | Declares a variable. Its type can go before the name. | `let total = 0` or `let Int total = 0` |
+| `const` | Declares a constant, which can't be assigned again. | `const limit = 5` |
+| `import` | Loads another `.fab` file, or a file from an installed package. | `import "./greet.fab"` |
+| `class` | Declares a class with fields, a constructor, and methods. | `class Square { ... }` |
+| `interface` | Lists methods that a class promises to provide. | `interface Shape { func area() -> Int }` |
+| `init` | Declares a class's constructor. Create an object with the class name, such as `Square(4)`. | `init(Int side) { this.side = side }` |
+
+### Control flow
+
+| Keyword | What it does | Example |
+| --- | --- | --- |
+| `if` | Runs a block when a condition is true. | `if total > 10 { print("big") }` |
+| `else` | Runs a block when the `if` condition is false. It's also the fallback arm of `match`. | `} else { print("small") }` |
+| `while` | Repeats a block while a condition is true. | `while n < 3 { n += 1 }` |
+| `for` | Loops over a range or a list. | `for i in 1..10 { ... }` |
+| `in` | Separates the loop variable from what it loops over. A range such as `1..3` includes 3. | `for color in colors { ... }` |
+| `break` | Leaves the nearest loop. It's only allowed inside a loop. | `if i > limit { break }` |
+| `continue` | Skips to the next round of the nearest loop. It's only allowed inside a loop. | `if i == 2 { continue }` |
+| `match` | Runs the first `case` that equals a value. Arms never fall through. | `match n { case 0 { ... } else { ... } }` |
+| `case` | One arm of a `match`. It can list several values. | `case 1, 2, 3 { return "small" }` |
+| `return` | Ends a function, optionally with a value. | `return a + b` |
+
+### Errors
+
+| Keyword | What it does | Example |
+| --- | --- | --- |
+| `throw` | Raises an error, usually with a message. | `throw "something went wrong"` |
+| `try` | Runs a block, and sends any error it raises to `catch`. | `try { ... }` |
+| `catch` | Handles the error. `error_message(err)` gives its text. | `catch (err) { print(error_message(err)) }` |
+
+### Classes and visibility
+
+| Keyword | What it does | Example |
+| --- | --- | --- |
+| `extends` | Makes a class inherit from a parent class. | `class Square extends Base { ... }` |
+| `implements` | Says a class provides an interface's methods. List several with commas. | `class Base implements Shape { ... }` |
+| `abstract` | Marks a class that can only be extended, not created directly. | `abstract class Base { ... }` |
+| `override` | Replaces a method from the parent class. The class must have a parent. | `public override func area() -> Int { ... }` |
+| `super` | Calls the parent class's version of a method. | `return "big " + super.name()` |
+| `this` | The current object, inside a class. | `this.side = side` |
+| `public` | Lets code anywhere use a field or method. | `public func area() -> Int { ... }` |
+| `private` | Limits a field or method to its own class. Members are private when no keyword is given. | `private Int side` |
+| `protected` | Limits a field or method to its own class and its child classes. | `protected String label` |
+
+### Values
+
+| Keyword | What it does | Example |
+| --- | --- | --- |
+| `true` | The Boolean value true. | `let waiting = true` |
+| `false` | The Boolean value false. | `waiting = false` |
+| `null` | No value. Only a type ending in `?` can hold it. | `let String? nickname = null` |
+
+### All 32 keywords in one program
+
+Save this as `greet.fab`:
+
+```fubby
+func greet(String name) -> String {
+    return "Hello, " + name
+}
+```
+
+Save this as `keywords.fab` in the same folder:
+
+```fubby
+import "./greet.fab"
+
+interface Shape {
+    func area() -> Int
+    func name() -> String
+}
+
+abstract class Base implements Shape {
+    protected String label
+
+    init(String label) {
+        this.label = label
+    }
+
+    public func area() -> Int {
+        return 0
+    }
+
+    public func name() -> String {
+        return this.label
+    }
+}
+
+class Square extends Base {
+    private Int side
+
+    init(Int side) {
+        this.label = "square"
+        this.side = side
+    }
+
+    public override func area() -> Int {
+        return this.side * this.side
+    }
+
+    public override func name() -> String {
+        return "big " + super.name()
+    }
+}
+
+func size(Int n) -> String {
+    match n {
+        case 0 { return "zero" }
+        case 1, 2, 3 { return "small" }
+        else { return "large" }
+    }
+}
+
+func main() {
+    print(greet("Fubby"))
+
+    const limit = 5
+    let total = 0
+    for i in 1..10 {
+        if i == 2 {
+            continue
+        }
+        if i > limit {
+            break
+        }
+        total += i
+    }
+    print(total)
+
+    let square = Square(4)
+    print(square.name() + " has area " + square.area())
+    print(size(2))
+
+    let String? nickname = null
+    let waiting = true
+    while waiting {
+        waiting = false
+    }
+    if nickname == null && waiting == false {
+        print("no nickname")
+    } else {
+        print(nickname)
+    }
+
+    try {
+        throw "something went wrong"
+    } catch (err) {
+        print("caught: " + error_message(err))
+    }
+}
+```
+
+Check it, then run it:
+
+```sh
+fubby check keywords.fab
+fubby run keywords.fab
+```
+
+It prints:
+
+```text
+Hello, Fubby
+13
+big square has area 16
+small
+no nickname
+caught: Fubby throw: something went wrong
+```
+
+Fubby's checker catches keyword mistakes before anything runs. For example, it
+reports `Cannot assign to constant` for a `const`, `Cannot instantiate abstract
+class` for an `abstract` class, and `Private property` when code outside a class
+reads a `private` or `protected` member.
+
 ## Language fundamentals
 
 ### Variables, operators, control flow, and functions
