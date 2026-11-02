@@ -8,8 +8,8 @@ package manager. This download is the **Fubby 0.1.2
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
-**Fubby is now available for Windows.** Download the 0.1.3 beta from the
-[Windows beta](#windows-beta-013) section.
+**Fubby is now available for Linux and Windows.** Get the
+[Linux build](#linux-013), or the [Windows beta](#windows-beta-013).
 
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
@@ -23,12 +23,49 @@ Rust implementation source.
 | --- | --- |
 | macOS Intel (`x86_64-apple-darwin`) | Locally verified on an Intel macOS build host. A separate physical clean-machine test is still pending. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
-| Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
+| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.3.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux-013). |
+| Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
 | Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.3 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
 Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
 change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
 under the [Fubby Software License](LICENSE.txt); see the license section below.
+
+## Linux (0.1.3)
+
+Fubby 0.1.3 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
+glibc 2.34 or later, so it should also run on Ubuntu 22.04, Debian 12, RHEL,
+Rocky and Alma Linux 9, Fedora 35 or later, and Amazon Linux 2023. It won't run
+on older systems such as Ubuntu 20.04, or on Alpine, which doesn't use glibc. To
+see your glibc version, run `ldd --version`.
+
+### Download and verify on Linux
+
+```sh
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
+```
+
+The second command must print this value. Stop if it differs.
+
+```text
+b46ee7229bc260bae54801301cad9e0bc52aa22c56398cb16c7e2b2874255154
+```
+
+### Install on Linux
+
+```sh
+tar -xzf fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-0.1.3-x86_64-unknown-linux-gnu
+./install.sh
+export PATH="$HOME/.local/bin:$PATH"
+fubby --version
+```
+
+The installer copies only `fubby` into `~/.local/bin`, and never uses `sudo`. To
+keep `fubby` available in new terminals, add the `export` line to `~/.bashrc`. To
+uninstall, run `./uninstall.sh` from the same folder. If you see
+`GLIBC_2.34 not found`, your Linux is too old for this build.
 
 ## Windows beta (0.1.3)
 
@@ -93,9 +130,10 @@ projects.
 - the output of `fubby --version`
 - the command you ran, and what happened
 
-### What's new in 0.1.3
+## What's new in 0.1.3
 
-0.1.3 adds Windows support. The language is the same as 0.1.2. On every platform:
+0.1.3 adds Linux and Windows downloads. The language is the same as 0.1.2. On
+every platform:
 
 - `fubby shady fmt` keeps Windows (CRLF) line endings in files that use them.
 - Packages are refused if they contain file names Windows can't use, such as
@@ -694,16 +732,17 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 - Binaries are not signed or notarized; independent build provenance is not
   provided.
 - Smokey registries are local only; publisher authentication is absent.
-- Apple Silicon and Linux are unverified. Windows is a new beta, so expect some bugs
-  and please report them.
+- Apple Silicon and Linux ARM64 have no download yet. Linux x86-64 was tested on
+  Ubuntu 24.04 only. Windows is a new beta, so expect some bugs and please report
+  them.
 - A separate physical clean-machine test remains pending.
 
 ## Troubleshooting and uninstall
 
 If `fubby` is not found, ensure `$HOME/.local/bin` is on `PATH`. If the
 executable reports a target mismatch, compare `fubby --version` with the
-platform table above. Linux compatibility and glibc minimum are not
-established. Do not bypass macOS security prompts for untrusted artifacts.
+platform table above. On Linux, `GLIBC_2.34 not found` means your system is too
+old for this build. Do not bypass macOS security prompts for untrusted artifacts.
 
 The extracted bundle includes an optional archive-only smoke check:
 
@@ -752,7 +791,7 @@ This binary is Fubby `0.1.2` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
 starter includes `.fab` examples and a local path package. Minimum supported
-macOS version, Linux ABI/glibc floor, and Apple Silicon behavior are not
-established. The Windows beta is Fubby `0.1.3` for `x86_64-pc-windows-gnu`, and
+macOS version and Apple Silicon behavior are not established. The Linux build
+is Fubby `0.1.3` for `x86_64-unknown-linux-gnu`, and needs glibc 2.34 or later. The Windows beta is Fubby `0.1.3` for `x86_64-pc-windows-gnu`, and
 needs Windows 10 or later. No production compatibility or support guarantee
 is made.
