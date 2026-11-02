@@ -8,6 +8,8 @@ package manager. This download is the **Fubby 0.1.2
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
+A **Windows beta (0.1.3)** is also available. See [Windows beta](#windows-beta-013).
+
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
 install/uninstall scripts, documentation, a checkout-independent smoke
@@ -21,25 +23,84 @@ Rust implementation source.
 | macOS Intel (`x86_64-apple-darwin`) | Locally verified on an Intel macOS build host. A separate physical clean-machine test is still pending. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
 | Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
-| Windows | In progress. No download yet. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Beta (0.1.3).** Built on a Mac and not yet run on a real Windows PC. Download it from the [`windows-beta`](windows-beta/) folder. |
 
 Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
 change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
 under the [Fubby Software License](LICENSE.txt); see the license section below.
 
-## Windows support
+## Windows beta (0.1.3)
 
-Windows support is in progress, and there's no Windows download yet. Fubby now
-builds for 64-bit Windows, but it hasn't been tested on a real Windows PC, so we
-aren't releasing it until it has. No date is set.
+Fubby 0.1.3 for Windows is a **beta**. It was built on a Mac for 64-bit Windows,
+and nobody had run it on a real Windows PC when it was published. Some things may
+not work. Please try it and [report what you find](#report-a-windows-problem).
 
-The first Windows version is planned to:
+- Needs Windows 10 or later, on an x86-64 (Intel or AMD) PC.
+- Comes as a zip file with a PowerShell installer that doesn't need administrator
+  rights.
+- Isn't signed, so Windows SmartScreen may warn you before it runs.
 
-- need Windows 10 or later
-- come as a zip file, with an installer that doesn't need administrator rights
-- be unsigned at first, so Windows may show a SmartScreen warning
+### Download and verify
 
-Watch this repository for the release.
+Download [`fubby-0.1.3-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.3-x86_64-pc-windows-gnu.zip)
+from the [`windows-beta`](windows-beta/) folder. In PowerShell, from the folder you saved it in,
+check its SHA-256:
+
+```powershell
+Get-FileHash .\fubby-0.1.3-x86_64-pc-windows-gnu.zip -Algorithm SHA256
+```
+
+The expected value is below. PowerShell prints it in capitals, which doesn't
+matter. Stop if it differs.
+
+```text
+12e6980e299ff3c5b9fa6e6f9968405519ed2493b4788b1099dcd76dadcad489
+```
+
+### Install
+
+```powershell
+Expand-Archive .\fubby-0.1.3-x86_64-pc-windows-gnu.zip -DestinationPath .
+cd .\fubby-0.1.3-x86_64-pc-windows-gnu
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+`-ExecutionPolicy Bypass` lets this one script run without changing your
+PowerShell settings. The installer copies `fubby.exe` to
+`%LOCALAPPDATA%\Programs\Fubby\bin` and adds that folder to your user PATH.
+Add `-Prefix <folder>` to install somewhere else, or `-NoPath` to leave PATH
+alone.
+
+Open a new terminal, then check it works:
+
+```powershell
+fubby --version
+fubby init hello-app
+```
+
+Restart VS Code afterwards, so the Fubby plugin can find `fubby`.
+
+To uninstall, run `powershell -ExecutionPolicy Bypass -File .\uninstall.ps1` from
+the same folder. It removes `fubby.exe` and its PATH entry, and never touches your
+projects.
+
+### Report a Windows problem
+
+[Open an issue](https://github.com/tusharuit25/fubby-releases/issues/new) with:
+
+- your Windows version (run `winver`)
+- the output of `fubby --version`
+- the command you ran, and what happened
+
+### What's new in 0.1.3
+
+0.1.3 adds Windows support. The language is the same as 0.1.2. On every platform:
+
+- `fubby shady fmt` keeps Windows (CRLF) line endings in files that use them.
+- Packages are refused if they contain file names Windows can't use, such as
+  `CON` or `NUL`, so every package works on every platform.
+
+macOS stays at 0.1.2 for now, because these changes don't affect it.
 
 ## What's new in 0.1.2
 
@@ -632,7 +693,8 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 - Binaries are not signed or notarized; independent build provenance is not
   provided.
 - Smokey registries are local only; publisher authentication is absent.
-- Apple Silicon and Linux are unverified. Windows support is in progress, with no download yet.
+- Apple Silicon and Linux are unverified. Windows is a beta that hadn't been run on a
+  real Windows PC when it was published.
 - A separate physical clean-machine test remains pending.
 
 ## Troubleshooting and uninstall
@@ -689,6 +751,7 @@ This binary is Fubby `0.1.2` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
 starter includes `.fab` examples and a local path package. Minimum supported
-macOS version, Linux ABI/glibc floor, Apple Silicon behavior, and Windows
-support are not established. No production compatibility or support guarantee
+macOS version, Linux ABI/glibc floor, and Apple Silicon behavior are not
+established. The Windows beta is Fubby `0.1.3` for `x86_64-pc-windows-gnu`, and
+needs Windows 10 or later. No production compatibility or support guarantee
 is made.
