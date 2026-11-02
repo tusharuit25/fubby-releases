@@ -1,15 +1,15 @@
-# Fubby 0.1.2 developer preview
+# Fubby 0.1.4 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
 Fubby is an all-in-one programming language: one program includes the language,
 a web server, a SQLite database, a test runner, a formatter, a linter, and a
-package manager. This download is the **Fubby 0.1.2
+package manager. This download is the **Fubby 0.1.4
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
 **Fubby is now available for Linux and Windows.** Get the
-[Linux build](#linux-013), or the [Windows beta](#windows-beta-013).
+[Linux build](#linux), or the [Windows beta](#windows-beta).
 
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
@@ -21,19 +21,19 @@ Rust implementation source.
 
 | Platform | Status |
 | --- | --- |
-| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.2.** Tested on a real Intel Mac. |
+| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.4.** Tested on a real Intel Mac. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
-| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.3.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux-013). |
+| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.4.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
 | Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
-| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.3 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.4 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
-Fubby is currently version `0.1.2` on macOS, and `0.1.3` on Linux and Windows.
+Fubby is currently version `0.1.4` on every platform.
 Language syntax, CLI behavior, and APIs may change during the 0.x preview. Fubby is
 free to use under the [Fubby Software License](LICENSE.txt); see the license section below.
 
-## Linux (0.1.3)
+## Linux
 
-Fubby 0.1.3 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
+Fubby 0.1.4 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
 glibc 2.34 or later, so it should also run on Ubuntu 22.04, Debian 12, RHEL,
 Rocky and Alma Linux 9, Fedora 35 or later, and Amazon Linux 2023. It won't run
 on older systems such as Ubuntu 20.04, or on Alpine, which doesn't use glibc. To
@@ -42,21 +42,21 @@ see your glibc version, run `ldd --version`.
 ### Download and verify on Linux
 
 ```sh
-curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
-sha256sum fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 The second command must print this value. Stop if it differs.
 
 ```text
-b46ee7229bc260bae54801301cad9e0bc52aa22c56398cb16c7e2b2874255154
+df763ab2f761956a79b3605f85d5db816fcf7a4f1fca05ce371db4bde710d52e
 ```
 
 ### Install on Linux
 
 ```sh
-tar -xzf fubby-0.1.3-x86_64-unknown-linux-gnu.tar.gz
-cd fubby-0.1.3-x86_64-unknown-linux-gnu
+tar -xzf fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-0.1.4-x86_64-unknown-linux-gnu
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -67,9 +67,9 @@ keep `fubby` available in new terminals, add the `export` line to `~/.bashrc`. T
 uninstall, run `./uninstall.sh` from the same folder. If you see
 `GLIBC_2.34 not found`, your Linux is too old for this build.
 
-## Windows beta (0.1.3)
+## Windows beta
 
-Fubby 0.1.3 for Windows is out now, as a **beta**. It's brand new, so you may be
+Fubby 0.1.4 for Windows is out now, as a **beta**. It's brand new, so you may be
 one of the first people to run it, and you may hit bugs. When you do, please
 [report them](#report-a-windows-problem), so they can be fixed in the next release.
 
@@ -80,26 +80,26 @@ one of the first people to run it, and you may hit bugs. When you do, please
 
 ### Download and verify
 
-Download [`fubby-0.1.3-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.3-x86_64-pc-windows-gnu.zip)
+Download [`fubby-0.1.4-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.4-x86_64-pc-windows-gnu.zip)
 from the [`windows-beta`](windows-beta/) folder. In PowerShell, from the folder you saved it in,
 check its SHA-256:
 
 ```powershell
-Get-FileHash .\fubby-0.1.3-x86_64-pc-windows-gnu.zip -Algorithm SHA256
+Get-FileHash .\fubby-0.1.4-x86_64-pc-windows-gnu.zip -Algorithm SHA256
 ```
 
 The expected value is below. PowerShell prints it in capitals, which doesn't
 matter. Stop if it differs.
 
 ```text
-12e6980e299ff3c5b9fa6e6f9968405519ed2493b4788b1099dcd76dadcad489
+f87bb718421d510d19b8557bd8f302b3d65067362a0d2379e7578c15d5caa0ec
 ```
 
 ### Install
 
 ```powershell
-Expand-Archive .\fubby-0.1.3-x86_64-pc-windows-gnu.zip -DestinationPath .
-cd .\fubby-0.1.3-x86_64-pc-windows-gnu
+Expand-Archive .\fubby-0.1.4-x86_64-pc-windows-gnu.zip -DestinationPath .
+cd .\fubby-0.1.4-x86_64-pc-windows-gnu
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -130,6 +130,28 @@ projects.
 - the output of `fubby --version`
 - the command you ran, and what happened
 
+## What's new in 0.1.4
+
+Fixes found by new benchmarks against Python. The language is the same as 0.1.3,
+and 0.1.4 is available for macOS, Linux, and Windows (beta).
+
+- **Scripts run without preview limits.** A script started with `fubby run` has
+  no step, time, or memory limit unless you set one with `FUBBY_MAX_STEPS`,
+  `FUBBY_TIMEOUT_MS`, or `FUBBY_MAX_ALLOC_BYTES`. Before, it stopped after
+  2,000,000 steps or 10 seconds. Web requests, Bela tasks, Shady, and the REPL
+  keep their limits.
+- **Servers stay up.** A route that builds a value referring to itself, such as
+  a list that contains itself, no longer stops every route after a few hundred
+  requests. Such values are freed when the request ends.
+- **Fast string building.** `text = text + piece` and `text += piece` grow the
+  string in place, and the new `str_join(items, separator)` joins a list.
+- **Bigger data.** JSON decoding is about 5 times faster. Strings and JSON can be
+  up to 16 MiB instead of 1 MiB, and lists and maps can hold 10,000,000 items
+  instead of 100,000.
+- **SQLite under load.** Database files use write-ahead logging, and statements
+  wait up to 5 seconds for a lock instead of 1, so several Snow workers can share
+  a database without timing out. Keep database files on a local disk.
+
 ## What's new in 0.1.3
 
 0.1.3 adds Linux and Windows downloads. The language is the same as 0.1.2. On
@@ -139,7 +161,7 @@ every platform:
 - Packages are refused if they contain file names Windows can't use, such as
   `CON` or `NUL`, so every package works on every platform.
 
-macOS stays at 0.1.2 for now, because these changes don't affect it.
+There was no macOS build of 0.1.3.
 
 ## What's new in 0.1.2
 
@@ -180,19 +202,19 @@ language is the same as 0.1.1.
 The archive file in this repository is:
 
 ```text
-fubby-0.1.2-x86_64-apple-darwin.tar.gz
+fubby-0.1.4-x86_64-apple-darwin.tar.gz
 ```
 
 Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.1.2-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.1.4-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-ce07e793ed824019183c9be42a2126a74aa5746ac5afa0d79ef7fa530473d077
+a78ecc719189d64c64b216da008283ed88f25d5948aaea0cac61c898b8e7d55b
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -205,8 +227,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.1.2-x86_64-apple-darwin.tar.gz
-cd fubby-0.1.2-x86_64-apple-darwin
+tar -xzf fubby-0.1.4-x86_64-apple-darwin.tar.gz
+cd fubby-0.1.4-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -704,7 +726,7 @@ The currently implemented built-ins include:
 
 - Strings: `str_upper`, `str_lower`, `str_trim`, `str_contains`,
   `str_replace`, `str_split`, `str_length`, `str_starts_with`,
-  `str_ends_with`, `str_index_of`, `str_substring`, `str_repeat`.
+  `str_ends_with`, `str_index_of`, `str_substring`, `str_repeat`, `str_join`.
 - Math: `math_abs`, `math_floor`, `math_ceil`, `math_sqrt`, `math_pow`,
   `math_min`, `math_max`, `math_sin`, `math_cos`, `math_tan`, `math_log`,
   `math_exp`, `math_round`, `math_trunc`.
@@ -893,7 +915,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.1.2-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.1.4-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -933,9 +955,9 @@ old for this build. Do not bypass macOS security prompts for untrusted artifacts
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.1.2-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.1.4-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.1.2-x86_64-apple-darwin/starter-project
+  fubby-0.1.4-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary copy of the starter project and a local loopback server.
@@ -943,7 +965,7 @@ It uses a temporary copy of the starter project and a local loopback server.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.1.2-x86_64-apple-darwin
+cd fubby-0.1.4-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -972,11 +994,11 @@ Fubby comes with no warranty. The interpreter's source code isn't public.
 
 ## Version compatibility
 
-This binary is Fubby `0.1.2` for `x86_64-apple-darwin`. Fubby is a 0.x preview;
+The downloads are Fubby `0.1.4` for `x86_64-apple-darwin`,
+`x86_64-unknown-linux-gnu`, and `x86_64-pc-windows-gnu`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
 starter includes `.fab` examples and a local path package. Minimum supported
 macOS version and Apple Silicon behavior are not established. The Linux build
-is Fubby `0.1.3` for `x86_64-unknown-linux-gnu`, and needs glibc 2.34 or later. The Windows beta is Fubby `0.1.3` for `x86_64-pc-windows-gnu`, and
-needs Windows 10 or later. No production compatibility or support guarantee
+needs glibc 2.34 or later, and the Windows beta needs Windows 10 or later. No production compatibility or support guarantee
 is made.
