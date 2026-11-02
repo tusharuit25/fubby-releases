@@ -21,11 +21,25 @@ Rust implementation source.
 | macOS Intel (`x86_64-apple-darwin`) | Locally verified on an Intel macOS build host. A separate physical clean-machine test is still pending. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
 | Linux x86-64 or ARM64 | Not verified; minimum glibc is unknown. |
-| Windows | Unsupported. |
+| Windows | In progress. No download yet. |
 
 Fubby is currently version `0.1.2`; language syntax, CLI behavior, and APIs may
 change during the 0.x preview. The separate physical-machine acceptance test is pending. Fubby is free to use
 under the [Fubby Software License](LICENSE.txt); see the license section below.
+
+## Windows support
+
+Windows support is in progress, and there's no Windows download yet. Fubby now
+builds for 64-bit Windows, but it hasn't been tested on a real Windows PC, so we
+aren't releasing it until it has. No date is set.
+
+The first Windows version is planned to:
+
+- need Windows 10 or later
+- come as a zip file, with an installer that doesn't need administrator rights
+- be unsigned at first, so Windows may show a SmartScreen warning
+
+Watch this repository for the release.
 
 ## What's new in 0.1.2
 
@@ -618,7 +632,7 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 - Binaries are not signed or notarized; independent build provenance is not
   provided.
 - Smokey registries are local only; publisher authentication is absent.
-- Apple Silicon and Linux are unverified; Windows is unsupported.
+- Apple Silicon and Linux are unverified. Windows support is in progress, with no download yet.
 - A separate physical clean-machine test remains pending.
 
 ## Troubleshooting and uninstall
