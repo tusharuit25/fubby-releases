@@ -4,7 +4,7 @@ func calculate() {
 }
 
 func main() {
-    let task = bela.spawn("calculate", {"value": 12})
+    let task = bela.spawn(calculate, {"value": 12})
     print(bela.status(task))
     print(bela.join(task))
 

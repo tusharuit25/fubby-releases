@@ -1,5 +1,5 @@
-import "package:greeting/src/lib.fab"
+import "package:greeting/src/lib.fab" as greeting
 
 func main() {
-    print(greeting())
+    print(greeting.greeting())
 }

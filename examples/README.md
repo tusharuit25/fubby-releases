@@ -1,6 +1,6 @@
 # Learn Fubby by example
 
-These standalone projects use the Fubby preview executable. No Rust compiler or interpreter source checkout is required. Install Fubby, put it on PATH, and confirm `fubby --version`. Use the M20 archive in this repository (SHA-256 `505c61cfa826764a4eb127acff5cacb2d8b9d67805bd0210bb965764bb52a670`). The shared 0.1.0 version string alone does not identify its milestone. See [installation instructions](../README.md#install-on-macos-intel).
+These standalone projects need Fubby 0.2.0 or later, because 0.2 changed how imports and handlers are written. No Rust compiler or interpreter source checkout is required. Install Fubby, put it on PATH, and confirm that `fubby --version` shows 0.2.0. See [installation instructions](../README.md#install-on-macos-intel), and the [upgrade guide](../UPGRADING_0.2.md) for what changed.
 
 Download this repository using GitHub **Code → Download ZIP**, extract it, and open `examples`. You can also clone the downloads repository. Start with folder 01 and work downward. Each folder includes its own commands, expected behavior, and any generated files. Run commands from the folder named in its README, not from this index directory.
 

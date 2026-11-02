@@ -6,7 +6,7 @@ func main() {
     data.set("status", "ready")
     print(data.has("status"))
     print(data.length())
-    print(greet())
+    print(m6_library.greet())
     try {
         throw "test exception"
     } catch (err) {

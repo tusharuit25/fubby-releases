@@ -3,4 +3,4 @@ manifest-version = 1
 [package]
 name = "text-util"
 version = "1.0.0"
-fubby = ">=0.1.0, <0.2.0"
+fubby = ">=0.2.0, <0.3.0"

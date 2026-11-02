@@ -3,7 +3,7 @@ manifest-version = 1
 [package]
 name = "integrated-preview"
 version = "0.1.0"
-fubby = ">=0.1.0, <0.2.0"
+fubby = ">=0.2.0, <0.3.0"
 
 [dependencies]
 preview-kit = { version = "^0.1.0", path = "../packages/preview-kit" }

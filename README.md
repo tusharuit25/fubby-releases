@@ -1,15 +1,18 @@
-# Fubby 0.1.5 developer preview
+# Fubby 0.2.0 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
 Fubby is an all-in-one programming language: one program includes the language,
 a web server, a SQLite database, a test runner, a formatter, a linter, and a
-package manager. This download is the **Fubby 0.1.5
+package manager. This download is the **Fubby 0.2.0
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
 **Fubby is now available for Linux and Windows.** Get the
 [Linux build](#linux), or the [Windows beta](#windows-beta).
+
+**0.2.0 changes the language**, so most 0.1 programs need small edits. See
+[What's new in 0.2.0](#whats-new-in-020) and the [upgrade guide](UPGRADING_0.2.md).
 
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
@@ -21,19 +24,19 @@ Rust implementation source.
 
 | Platform | Status |
 | --- | --- |
-| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.5.** Tested on a real Intel Mac. |
+| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.2.0.** Tested on a real Intel Mac. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
-| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.5.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
+| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.2.0.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
 | Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
-| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.5 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.2.0 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
-Fubby is currently version `0.1.5` on every platform.
+Fubby is currently version `0.2.0` on every platform.
 Language syntax, CLI behavior, and APIs may change during the 0.x preview. Fubby is
 free to use under the [Fubby Software License](LICENSE.txt); see the license section below.
 
 ## Linux
 
-Fubby 0.1.5 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
+Fubby 0.2.0 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
 glibc 2.34 or later, so it should also run on Ubuntu 22.04, Debian 12, RHEL,
 Rocky and Alma Linux 9, Fedora 35 or later, and Amazon Linux 2023. It won't run
 on older systems such as Ubuntu 20.04, or on Alpine, which doesn't use glibc. To
@@ -42,21 +45,21 @@ see your glibc version, run `ldd --version`.
 ### Download and verify on Linux
 
 ```sh
-curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
-sha256sum fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 The second command must print this value. Stop if it differs.
 
 ```text
-48aba18aee345ba394579248886e680d963c5e0b9b069deae1afb2e32ad1b44a
+be9447803fc9e77fce827b1c19341367a96d361899751249e7d8eb003902e898
 ```
 
 ### Install on Linux
 
 ```sh
-tar -xzf fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
-cd fubby-0.1.5-x86_64-unknown-linux-gnu
+tar -xzf fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-0.2.0-x86_64-unknown-linux-gnu
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -69,7 +72,7 @@ uninstall, run `./uninstall.sh` from the same folder. If you see
 
 ## Windows beta
 
-Fubby 0.1.5 for Windows is out now, as a **beta**. It's brand new, so you may be
+Fubby 0.2.0 for Windows is out now, as a **beta**. It's brand new, so you may be
 one of the first people to run it, and you may hit bugs. When you do, please
 [report them](#report-a-windows-problem), so they can be fixed in the next release.
 
@@ -80,26 +83,26 @@ one of the first people to run it, and you may hit bugs. When you do, please
 
 ### Download and verify
 
-Download [`fubby-0.1.5-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.5-x86_64-pc-windows-gnu.zip)
+Download [`fubby-0.2.0-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.2.0-x86_64-pc-windows-gnu.zip)
 from the [`windows-beta`](windows-beta/) folder. In PowerShell, from the folder you saved it in,
 check its SHA-256:
 
 ```powershell
-Get-FileHash .\fubby-0.1.5-x86_64-pc-windows-gnu.zip -Algorithm SHA256
+Get-FileHash .\fubby-0.2.0-x86_64-pc-windows-gnu.zip -Algorithm SHA256
 ```
 
 The expected value is below. PowerShell prints it in capitals, which doesn't
 matter. Stop if it differs.
 
 ```text
-a05c663d2317c2e633ac35293fd2d7d6730ce96fba31dde34522ae7934eb3738
+f778dccb87ed45762d5e132cc2aae977926259b46e48d4fe8ecd234af0e67db5
 ```
 
 ### Install
 
 ```powershell
-Expand-Archive .\fubby-0.1.5-x86_64-pc-windows-gnu.zip -DestinationPath .
-cd .\fubby-0.1.5-x86_64-pc-windows-gnu
+Expand-Archive .\fubby-0.2.0-x86_64-pc-windows-gnu.zip -DestinationPath .
+cd .\fubby-0.2.0-x86_64-pc-windows-gnu
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -150,6 +153,9 @@ MacBook Pro, and includes starting the program.
 Fubby starts in about 5 ms and Python in about 35 ms, which helps Fubby on short
 programs. Python's JSON module is written in C.
 
+0.2.0 changed the language without changing these numbers. Run one after the other,
+it took within 2% of 0.1.5's time on every program.
+
 **Web server.** With 4 workers, Snow answered a small JSON request 3,381 times a
 second, against 3,065 for Python's standard-library threading server, which isn't a
 production server. Snow's slowest 1% of requests took 3.9 ms, against 32 ms for
@@ -169,6 +175,26 @@ Next, we're working on:
 - sharing strings instead of copying them every time they're read
 
 We'll publish new numbers with every release.
+
+## What's new in 0.2.0
+
+0.2.0 changes the language now, so that 1.0 won't have to. Most 0.1 programs need small
+edits, and `fubby check` points to each line and shows the fix. The
+[upgrade guide](UPGRADING_0.2.md), which is also in every download, shows each change.
+
+- **Each file has its own names.** An import is named after its file, as in
+  `helpers.greeting()`, and `as` renames it. A file can be imported from several
+  places, and it's loaded once. See [Modules and imports](#modules-and-imports).
+- **Functions are values.** A function's name without `()` is a value, and
+  `func(Int n) -> Int { return n * 2 }` makes one without a name. Their type is `Func`.
+  See [Functions as values](#functions-as-values).
+- **Snow handlers and Bela tasks take the function itself**, as in
+  `snow.get("/", home)`. Quoted names still work, and `fubby shady lint` reports them.
+- **Null checks.** A value that may be null, such as a `String?`, has to be checked
+  before it's used where a `String` is needed. See
+  [Null and optional types](#null-and-optional-types).
+- **Packages** need `fubby = ">=0.2.0, <0.3.0"` in `fubby.toml`.
+- **The same speed as 0.1.5.**
 
 ## What's new in 0.1.5
 
@@ -252,19 +278,19 @@ language is the same as 0.1.1.
 The archive file in this repository is:
 
 ```text
-fubby-0.1.5-x86_64-apple-darwin.tar.gz
+fubby-0.2.0-x86_64-apple-darwin.tar.gz
 ```
 
 Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.1.5-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.2.0-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-b340c6780ab80d18f4f51c98c6d916c796372693f0093445deb0473d40fdfa7e
+87dbd82cf3492973e09fe1e1c5b72f9625382050845767b26a11fbfaddb491af
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -277,8 +303,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.1.5-x86_64-apple-darwin.tar.gz
-cd fubby-0.1.5-x86_64-apple-darwin
+tar -xzf fubby-0.2.0-x86_64-apple-darwin.tar.gz
+cd fubby-0.2.0-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -409,7 +435,7 @@ experimental local development server.
 Fubby has 32 keywords. They are reserved, so you can't use them as names for
 variables, functions, classes, or anything else. Type names such as `Int`,
 `String`, `List`, and `Any`, and the built-in roots `moon`, `snow`, and `bela`,
-are not keywords.
+are not keywords. Neither is `as`, which names an import.
 
 ### Declarations
 
@@ -418,7 +444,7 @@ are not keywords.
 | `func` | Declares a function or method. A program starts at `main`. | `func add(Int a, Int b) -> Int { return a + b }` |
 | `let` | Declares a variable. Its type can go before the name. | `let total = 0` or `let Int total = 0` |
 | `const` | Declares a constant, which can't be assigned again. | `const limit = 5` |
-| `import` | Loads another `.fab` file, or a file from an installed package. | `import "./greet.fab"` |
+| `import` | Loads another `.fab` file, or a file from an installed package. Its functions and classes are reached through the file's name. | `import "./greet.fab"`, then `greet.greet("Ann")` |
 | `class` | Declares a class with fields, a constructor, and methods. | `class Square { ... }` |
 | `interface` | Lists methods that a class promises to provide. | `interface Shape { func area() -> Int }` |
 | `init` | Declares a class's constructor. Create an object with the class name, such as `Square(4)`. | `init(Int side) { this.side = side }` |
@@ -530,7 +556,7 @@ func size(Int n) -> String {
 }
 
 func main() {
-    print(greet("Fubby"))
+    print(greet.greet("Fubby"))
 
     const limit = 5
     let total = 0
@@ -621,7 +647,7 @@ The language supports `let` bindings, `const` bindings, type annotations written
 before the name (`let Int count = 1`), `if`/`else`, `while`, `for name in
 collection`, `break`, `continue`, `match`, `return`, and functions. A variable
 declared in a block ends with that block. Types include `Int`, `Float`, `Bool`,
-`String`, `List`, `Map`, `Any`, and declared classes and interfaces. Operators include `+ - * / %`, comparisons, `&&`, `||`, unary
+`String`, `List`, `Map`, `Any`, `Func`, and declared classes and interfaces. Operators include `+ - * / %`, comparisons, `&&`, `||`, unary
 `!`, and compound assignments. `+` also concatenates strings.
 
 ### Loops and match
@@ -648,19 +674,65 @@ func main() {
 
 ### Null and optional types
 
-A type holds `null` only if it ends in `?`. A plain `String` can never be null,
-and `null` can't be used with `+`, so check for it first:
+A type holds `null` only if it ends in `?`. A plain `String` can never be null.
+A `String?` can't be used where a `String` is needed until it's checked, and the
+checker follows `if x != null`, the `else` of `if x == null`, the rest of a block after
+`if x == null { return }`, and the right side of `&&` and `||`:
 
 ```fubby
+func shout(String text) -> String {
+    return str_upper(text)
+}
+
+func find_nickname(String name) -> String? {
+    if name == "Asha" {
+        return "Ash"
+    }
+    return null
+}
+
 func main() {
-    let String? nickname = null
-    if nickname == null {
+    let String? nickname = find_nickname("Asha")
+    if nickname != null {
+        print(shout(nickname))
+    }
+    let String? missing = find_nickname("Ben")
+    if missing == null {
         print("no nickname")
     }
-    nickname = "Ash"
-    print(nickname)
 }
 ```
+
+A field can change between the check and its use, so copy it into a variable and
+check that variable.
+
+### Functions as values
+
+A function's name without `()` is a value of type `Func`, and `func(...) -> Type { ... }`
+makes a function without a name. It copies the outer variables it uses when it's made,
+as constants:
+
+```fubby
+func double(Int n) -> Int {
+    return n * 2
+}
+
+func apply(Func step, Int value) -> Int {
+    return step(value)
+}
+
+func main() {
+    let Int bonus = 10
+    let add_bonus = func(Int n) -> Int {
+        return n + bonus
+    }
+    print(apply(double, 4))
+    print(apply(add_bonus, 4))
+}
+```
+
+It prints `8` and then `14`. Snow handlers and Bela tasks take functions too, but not
+ones that copied variables, because they run on other threads.
 
 ### Collections
 
@@ -745,16 +817,14 @@ and cancellation are not made unlimited by catching an error.
 
 ### Modules and imports
 
-The built-in roots `moon`, `snow`, and `bela` expose Moon, Snow, and Bela APIs
-in their relevant runtime contexts. Legacy relative imports of `.fab` files
-remain supported. Projects managed with Smokey may import installed files
-using `package:<package-name>/<path>` after dependency installation.
+Each file has its own names. An import is named after its file, and you reach the
+functions and classes it declares through that name. `as` gives it another name.
 
 ```fubby
 import "./helpers.fab"
 
 func main() {
-    print(helper_message())
+    print(helpers.helper_message())
 }
 ```
 
@@ -765,6 +835,16 @@ func helper_message() -> String {
     return "Hello from a relative module"
 }
 ```
+
+Inside a file, its own functions and classes keep their plain names. Types,
+`extends`, and `implements` use imported names the same way, as in
+`class Puppy extends pets.Dog`. A file imported from several places is loaded once,
+and import cycles are errors. An import can't be named `moon`, `snow`, or `bela`,
+which are built in.
+
+Projects managed with Smokey import installed packages with
+`package:<package-name>/<path>`. Package files are usually called `lib.fab`, so name
+the import: `import "package:greeting/src/lib.fab" as greeting`.
 
 Relative imports are loaded from the importing file's directory. Keep imports
 inside the project/package root; runtime file confinement applies where
@@ -868,8 +948,8 @@ This minimal app registers a page and a JSON endpoint:
 
 ```fubby
 func main() {
-    snow.get("/", "home")
-    snow.get("/api/hello", "api_hello")
+    snow.get("/", home)
+    snow.get("/api/hello", api_hello)
 }
 
 func home() {
@@ -910,7 +990,7 @@ func calculate() {
 }
 
 func main() {
-    let task = bela.spawn("calculate", {"value": 12})
+    let task = bela.spawn(calculate, {"value": 12})
     print(bela.join(task))
 
     let channel = bela.channel(2)
@@ -947,14 +1027,14 @@ manifest-version = 1
 [package]
 name = "app"
 version = "0.1.0"
-fubby = ">=0.1.0, <0.2.0"
+fubby = ">=0.2.0, <0.3.0"
 
 [dependencies]
 greeting = { version = "^0.1.0", path = "../greeting" }
 ```
 
 After installation, Fubby writes `fubby.lock` and `.fubby/packages/`. Package
-imports use `import "package:greeting/src/lib.fab"`. Smokey supports local path
+imports use `import "package:greeting/src/lib.fab" as greeting`. Smokey supports local path
 dependencies and a local registry. It does not use a public network registry,
 and hashes do not authenticate package publishers.
 
@@ -965,7 +1045,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.1.5-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.2.0-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -1007,9 +1087,9 @@ old for this build. Do not bypass macOS security prompts for untrusted artifacts
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.1.5-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.2.0-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.1.5-x86_64-apple-darwin/starter-project
+  fubby-0.2.0-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary copy of the starter project and a local loopback server.
@@ -1017,7 +1097,7 @@ It uses a temporary copy of the starter project and a local loopback server.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.1.5-x86_64-apple-darwin
+cd fubby-0.2.0-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -1046,7 +1126,7 @@ Fubby comes with no warranty. The interpreter's source code isn't public.
 
 ## Version compatibility
 
-The downloads are Fubby `0.1.5` for `x86_64-apple-darwin`,
+The downloads are Fubby `0.2.0` for `x86_64-apple-darwin`,
 `x86_64-unknown-linux-gnu`, and `x86_64-pc-windows-gnu`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged

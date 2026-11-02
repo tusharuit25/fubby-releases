@@ -1,6 +1,6 @@
-import "package:preview-kit/src/lib.fab"
+import "package:preview-kit/src/lib.fab" as preview_kit
 
 func main() {
-    let value = preview_greeting("  Fubby developer  ")
+    let value = preview_kit.preview_greeting("  Fubby developer  ")
     print(value)
 }

@@ -1,5 +1,5 @@
-import "package:text-util/src/lib.fab"
+import "package:text-util/src/lib.fab" as text_util
 
 func greeting() -> String {
-    return package_message()
+    return text_util.package_message()
 }
