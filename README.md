@@ -1,10 +1,10 @@
-# Fubby 0.1.4 developer preview
+# Fubby 0.1.5 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
 Fubby is an all-in-one programming language: one program includes the language,
 a web server, a SQLite database, a test runner, a formatter, a linter, and a
-package manager. This download is the **Fubby 0.1.4
+package manager. This download is the **Fubby 0.1.5
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
 local development. It is experimental and is not production-ready.
 
@@ -21,19 +21,19 @@ Rust implementation source.
 
 | Platform | Status |
 | --- | --- |
-| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.4.** Tested on a real Intel Mac. |
+| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.1.5.** Tested on a real Intel Mac. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
-| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.4.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
+| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.1.5.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
 | Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
-| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.4 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.1.5 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
-Fubby is currently version `0.1.4` on every platform.
+Fubby is currently version `0.1.5` on every platform.
 Language syntax, CLI behavior, and APIs may change during the 0.x preview. Fubby is
 free to use under the [Fubby Software License](LICENSE.txt); see the license section below.
 
 ## Linux
 
-Fubby 0.1.4 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
+Fubby 0.1.5 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
 glibc 2.34 or later, so it should also run on Ubuntu 22.04, Debian 12, RHEL,
 Rocky and Alma Linux 9, Fedora 35 or later, and Amazon Linux 2023. It won't run
 on older systems such as Ubuntu 20.04, or on Alpine, which doesn't use glibc. To
@@ -42,21 +42,21 @@ see your glibc version, run `ldd --version`.
 ### Download and verify on Linux
 
 ```sh
-curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
-sha256sum fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 The second command must print this value. Stop if it differs.
 
 ```text
-df763ab2f761956a79b3605f85d5db816fcf7a4f1fca05ce371db4bde710d52e
+48aba18aee345ba394579248886e680d963c5e0b9b069deae1afb2e32ad1b44a
 ```
 
 ### Install on Linux
 
 ```sh
-tar -xzf fubby-0.1.4-x86_64-unknown-linux-gnu.tar.gz
-cd fubby-0.1.4-x86_64-unknown-linux-gnu
+tar -xzf fubby-0.1.5-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-0.1.5-x86_64-unknown-linux-gnu
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -69,7 +69,7 @@ uninstall, run `./uninstall.sh` from the same folder. If you see
 
 ## Windows beta
 
-Fubby 0.1.4 for Windows is out now, as a **beta**. It's brand new, so you may be
+Fubby 0.1.5 for Windows is out now, as a **beta**. It's brand new, so you may be
 one of the first people to run it, and you may hit bugs. When you do, please
 [report them](#report-a-windows-problem), so they can be fixed in the next release.
 
@@ -80,26 +80,26 @@ one of the first people to run it, and you may hit bugs. When you do, please
 
 ### Download and verify
 
-Download [`fubby-0.1.4-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.4-x86_64-pc-windows-gnu.zip)
+Download [`fubby-0.1.5-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.1.5-x86_64-pc-windows-gnu.zip)
 from the [`windows-beta`](windows-beta/) folder. In PowerShell, from the folder you saved it in,
 check its SHA-256:
 
 ```powershell
-Get-FileHash .\fubby-0.1.4-x86_64-pc-windows-gnu.zip -Algorithm SHA256
+Get-FileHash .\fubby-0.1.5-x86_64-pc-windows-gnu.zip -Algorithm SHA256
 ```
 
 The expected value is below. PowerShell prints it in capitals, which doesn't
 matter. Stop if it differs.
 
 ```text
-f87bb718421d510d19b8557bd8f302b3d65067362a0d2379e7578c15d5caa0ec
+a05c663d2317c2e633ac35293fd2d7d6730ce96fba31dde34522ae7934eb3738
 ```
 
 ### Install
 
 ```powershell
-Expand-Archive .\fubby-0.1.4-x86_64-pc-windows-gnu.zip -DestinationPath .
-cd .\fubby-0.1.4-x86_64-pc-windows-gnu
+Expand-Archive .\fubby-0.1.5-x86_64-pc-windows-gnu.zip -DestinationPath .
+cd .\fubby-0.1.5-x86_64-pc-windows-gnu
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -132,20 +132,20 @@ projects.
 
 ## Performance compared with Python
 
-We ran the same eight programs in Fubby 0.1.4 and Python 3.14, and checked that both
+We ran the same eight programs in Fubby 0.1.5 and Python 3.14, and checked that both
 printed exactly the same output. Each time is the median of 5 runs on an Intel Core i5
 MacBook Pro, and includes starting the program.
 
 | Program | What it does | Fubby | Python | Fubby is |
 | --- | --- | ---: | ---: | --- |
-| Strings | Build a 130 KB string with 20,000 appends | 28 ms | 130 ms | 4.6× faster |
-| SQLite | Insert 20,000 rows, then sum them | 126 ms | 84 ms | 1.5× slower |
-| Maps | Insert 50,000 keys, then look each one up | 110 ms | 70 ms | 1.6× slower |
-| Lists | Add 90,000 items, then read each one | 99 ms | 54 ms | 1.8× slower |
-| Loops | 3,000,000 rounds of arithmetic | 1,218 ms | 455 ms | 2.7× slower |
-| JSON | Encode and decode 1,000 rows, 200 times | 766 ms | 275 ms | 2.8× slower |
-| Function calls | Recursive `fib(25)`, about 243,000 calls | 192 ms | 44 ms | 4.4× slower |
-| Objects | Create 400,000 objects and call methods on them | 1,807 ms | 108 ms | 16.8× slower |
+| Strings | Build a 130 KB string with 20,000 appends | 24 ms | 131 ms | 5.5× faster |
+| Lists | Add 90,000 items, then read each one | 58 ms | 54 ms | 1.1× slower |
+| SQLite | Insert 20,000 rows, then sum them | 123 ms | 88 ms | 1.4× slower |
+| Maps | Insert 50,000 keys, then look each one up | 91 ms | 67 ms | 1.4× slower |
+| Loops | 3,000,000 rounds of arithmetic | 924 ms | 477 ms | 1.9× slower |
+| JSON | Encode and decode 1,000 rows, 200 times | 768 ms | 282 ms | 2.7× slower |
+| Function calls | Recursive `fib(25)`, about 243,000 calls | 142 ms | 43 ms | 3.3× slower |
+| Objects | Create 400,000 objects and call methods on them | 704 ms | 108 ms | 6.5× slower |
 
 Fubby starts in about 5 ms and Python in about 35 ms, which helps Fubby on short
 programs. Python's JSON module is written in C.
@@ -153,22 +153,32 @@ programs. Python's JSON module is written in C.
 **Web server.** With 4 workers, Snow answered a small JSON request 3,381 times a
 second, against 3,065 for Python's standard-library threading server, which isn't a
 production server. Snow's slowest 1% of requests took 3.9 ms, against 32 ms for
-Python. In a 20-minute test through JSON and SQLite, Snow served 934,642 requests with
+Python. In a 20-minute test through JSON and SQLite, Snow served 914,497 requests with
 no errors, and its memory stayed flat at about 6 MB.
 
 ### Closing the gap
 
-We're working on closing these gaps. The next release makes objects 2.6 times faster,
-to about 6 to 7 times slower than Python. It also makes lists 1.7 times faster, and
-function calls and loops 1.3 times faster. These are measured, but not released yet.
+We're working on closing these gaps. 0.1.5 made objects 2.6 times faster than 0.1.4,
+from 16.8 times slower than Python to 6.5 times. It also made lists 1.7 times faster,
+and function calls and loops 1.3 times faster.
 
-After that, we're working on:
+Next, we're working on:
 
 - fewer memory allocations for each function call and each object
 - reading each operator once, instead of comparing its text every time it runs
 - sharing strings instead of copying them every time they're read
 
 We'll publish new numbers with every release.
+
+## What's new in 0.1.5
+
+A faster interpreter and secure random numbers. The language is the same as 0.1.4.
+
+- **Faster.** Objects are 2.6 times faster, lists 1.7 times, and function calls and
+  loops 1.3 times. See [Performance compared with Python](#performance-compared-with-python).
+- **Secure random numbers.** `random_int` now uses the operating system's secure random
+  source, so its values can't be predicted. Before, it came from a generator seeded with
+  the clock.
 
 ## What's new in 0.1.4
 
@@ -242,19 +252,19 @@ language is the same as 0.1.1.
 The archive file in this repository is:
 
 ```text
-fubby-0.1.4-x86_64-apple-darwin.tar.gz
+fubby-0.1.5-x86_64-apple-darwin.tar.gz
 ```
 
 Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.1.4-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.1.5-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-a78ecc719189d64c64b216da008283ed88f25d5948aaea0cac61c898b8e7d55b
+b340c6780ab80d18f4f51c98c6d916c796372693f0093445deb0473d40fdfa7e
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -267,8 +277,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.1.4-x86_64-apple-darwin.tar.gz
-cd fubby-0.1.4-x86_64-apple-darwin
+tar -xzf fubby-0.1.5-x86_64-apple-darwin.tar.gz
+cd fubby-0.1.5-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -955,7 +965,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.1.4-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.1.5-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -972,8 +982,7 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 ## Security considerations and limitations
 
 - **It isn't safe on the internet yet.** Snow has no login, sessions, or CSRF
-  protection, the random numbers aren't secure, there's no sandbox, and there's been
-  no security audit.
+  protection, there's no sandbox, and there's been no security audit.
 - Do not run untrusted Fubby source or packages.
 - There is no OS-level sandbox or hard OS heap quota.
 - Snow has no TLS or authentication/authorization; do not expose it to
@@ -998,9 +1007,9 @@ old for this build. Do not bypass macOS security prompts for untrusted artifacts
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.1.4-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.1.5-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.1.4-x86_64-apple-darwin/starter-project
+  fubby-0.1.5-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary copy of the starter project and a local loopback server.
@@ -1008,7 +1017,7 @@ It uses a temporary copy of the starter project and a local loopback server.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.1.4-x86_64-apple-darwin
+cd fubby-0.1.5-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -1037,7 +1046,7 @@ Fubby comes with no warranty. The interpreter's source code isn't public.
 
 ## Version compatibility
 
-The downloads are Fubby `0.1.4` for `x86_64-apple-darwin`,
+The downloads are Fubby `0.1.5` for `x86_64-apple-darwin`,
 `x86_64-unknown-linux-gnu`, and `x86_64-pc-windows-gnu`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
