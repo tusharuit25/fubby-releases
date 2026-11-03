@@ -1,6 +1,6 @@
 # Smokey local registry example
 
-This example demonstrates an application depending on `greeting`, which in turn depends on `text-util`. The registry is a local directory; these commands do not use the network. With Fubby 0.1.0 on `PATH`, start in this example folder.
+This example demonstrates an application depending on `greeting`, which in turn depends on `text-util`. The registry is a local directory; these commands do not use the network. With Fubby 0.3.0 on `PATH`, start in this example folder.
 
 ```sh
 REGISTRY="$(mktemp -d "${TMPDIR:-/tmp}/fubby-smokey.XXXXXX")"

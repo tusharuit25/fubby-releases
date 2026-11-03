@@ -2,7 +2,7 @@
 
 Milestone M17 combines Core helpers, Moon SQLite/HTTP, Snow pages and assets, Bela tasks/channels, Shady tests, and a local Smokey dependency.
 
-With Fubby 0.1.0 on PATH, start in this folder:
+With Fubby 0.3.0 on PATH, start in this folder:
 
 ```sh
 cd app

@@ -1,42 +1,46 @@
-# Fubby 0.2.0 developer preview
+# Fubby 0.3.0 developer preview
 
 ![Fubby Programming Language textbook cover](Fubby%20Programming%20Language%20Textbook%20Cover.png)
 
 Fubby is an all-in-one programming language: one program includes the language,
 a web server, a SQLite database, a test runner, a formatter, a linter, and a
-package manager. This download is the **Fubby 0.2.0
+package manager. This download is the **Fubby 0.3.0
 macOS Intel binary bundle**. It is intended for evaluation, learning, and
-local development. It is experimental and is not production-ready.
+small web apps run behind nginx or Caddy. It is experimental, hasn't had a
+security audit, and is not production-ready.
 
 **Fubby is now available for Linux and Windows.** Get the
 [Linux build](#linux), or the [Windows beta](#windows-beta).
 
-**0.2.0 changes the language**, so most 0.1 programs need small edits. See
-[What's new in 0.2.0](#whats-new-in-020) and the [upgrade guide](UPGRADING_0.2.md).
+**0.3.0 gets Snow ready to run on a server**, behind nginx or Caddy, with sessions,
+CSRF protection, uploads and a tested deployment guide. The language doesn't change, but
+packages need a new `fubby` range. See [What's new in 0.3.0](#whats-new-in-030) and the
+[upgrade guide](UPGRADING_0.3.md).
 
 The bundled starter demonstrates Fubby Core, Moon HTTP and SQLite, Shady,
 Snow, Bela, and Smokey together. The archive contains the Fubby executable,
 install/uninstall scripts, documentation, a checkout-independent smoke
-runner, and example `.fab` application/package source. It does not contain the
-Rust implementation source.
+runner, and example `.fab` application/package source. It also has
+`DEPLOYMENT.md`, with its nginx, Caddy and systemd configs and an example web app.
+It does not contain the Rust implementation source.
 
 ## Preview status and platform support
 
 | Platform | Status |
 | --- | --- |
-| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.2.0.** Tested on a real Intel Mac. |
+| macOS Intel (`x86_64-apple-darwin`) | **Released: 0.3.0.** Tested on a real Intel Mac. |
 | macOS Apple Silicon (`aarch64-apple-darwin`) | Not verified; do not assume compatibility. |
-| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.2.0.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
+| Linux x86-64 (`x86_64-unknown-linux-gnu`) | **Released: 0.3.0.** Built and tested on Ubuntu 24.04. Needs glibc 2.34 or later. See [Linux](#linux). |
 | Linux ARM64 (`aarch64-unknown-linux-gnu`) | No download yet. |
-| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.2.0 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
+| Windows 10 or later, x86-64 (`x86_64-pc-windows-gnu`) | **Released: 0.3.0 beta.** Available to download now from the [`windows-beta`](windows-beta/) folder. |
 
-Fubby is currently version `0.2.0` on every platform.
+Fubby is currently version `0.3.0` on every platform.
 Language syntax, CLI behavior, and APIs may change during the 0.x preview. Fubby is
 free to use under the [Fubby Software License](LICENSE.txt); see the license section below.
 
 ## Linux
 
-Fubby 0.2.0 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
+Fubby 0.3.0 for Linux was built and tested on Ubuntu 24.04, on x86-64. It needs
 glibc 2.34 or later, so it should also run on Ubuntu 22.04, Debian 12, RHEL,
 Rocky and Alma Linux 9, Fedora 35 or later, and Amazon Linux 2023. It won't run
 on older systems such as Ubuntu 20.04, or on Alpine, which doesn't use glibc. To
@@ -45,21 +49,21 @@ see your glibc version, run `ldd --version`.
 ### Download and verify on Linux
 
 ```sh
-curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
-sha256sum fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-0.3.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 The second command must print this value. Stop if it differs.
 
 ```text
-be9447803fc9e77fce827b1c19341367a96d361899751249e7d8eb003902e898
+b1a4083f5c1936af04a9b3f1609d5b304cd7b452937efa0517fc712feb926c31
 ```
 
 ### Install on Linux
 
 ```sh
-tar -xzf fubby-0.2.0-x86_64-unknown-linux-gnu.tar.gz
-cd fubby-0.2.0-x86_64-unknown-linux-gnu
+tar -xzf fubby-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-0.3.0-x86_64-unknown-linux-gnu
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -72,7 +76,7 @@ uninstall, run `./uninstall.sh` from the same folder. If you see
 
 ## Windows beta
 
-Fubby 0.2.0 for Windows is out now, as a **beta**. It's brand new, so you may be
+Fubby 0.3.0 for Windows is out now, as a **beta**. It's brand new, so you may be
 one of the first people to run it, and you may hit bugs. When you do, please
 [report them](#report-a-windows-problem), so they can be fixed in the next release.
 
@@ -83,26 +87,26 @@ one of the first people to run it, and you may hit bugs. When you do, please
 
 ### Download and verify
 
-Download [`fubby-0.2.0-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.2.0-x86_64-pc-windows-gnu.zip)
+Download [`fubby-0.3.0-x86_64-pc-windows-gnu.zip`](https://github.com/tusharuit25/fubby-releases/raw/main/windows-beta/fubby-0.3.0-x86_64-pc-windows-gnu.zip)
 from the [`windows-beta`](windows-beta/) folder. In PowerShell, from the folder you saved it in,
 check its SHA-256:
 
 ```powershell
-Get-FileHash .\fubby-0.2.0-x86_64-pc-windows-gnu.zip -Algorithm SHA256
+Get-FileHash .\fubby-0.3.0-x86_64-pc-windows-gnu.zip -Algorithm SHA256
 ```
 
 The expected value is below. PowerShell prints it in capitals, which doesn't
 matter. Stop if it differs.
 
 ```text
-f778dccb87ed45762d5e132cc2aae977926259b46e48d4fe8ecd234af0e67db5
+95959dbea7004a9e8385662ede827581defae59c0ceeaf0cfacb9e2f4cff7e6f
 ```
 
 ### Install
 
 ```powershell
-Expand-Archive .\fubby-0.2.0-x86_64-pc-windows-gnu.zip -DestinationPath .
-cd .\fubby-0.2.0-x86_64-pc-windows-gnu
+Expand-Archive .\fubby-0.3.0-x86_64-pc-windows-gnu.zip -DestinationPath .
+cd .\fubby-0.3.0-x86_64-pc-windows-gnu
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -135,32 +139,33 @@ projects.
 
 ## Performance compared with Python
 
-We ran the same eight programs in Fubby 0.1.5 and Python 3.14, and checked that both
+We ran the same eight programs in Fubby 0.3.0 and Python 3.14, and checked that both
 printed exactly the same output. Each time is the median of 5 runs on an Intel Core i5
 MacBook Pro, and includes starting the program.
 
 | Program | What it does | Fubby | Python | Fubby is |
 | --- | --- | ---: | ---: | --- |
-| Strings | Build a 130 KB string with 20,000 appends | 24 ms | 131 ms | 5.5× faster |
-| Lists | Add 90,000 items, then read each one | 58 ms | 54 ms | 1.1× slower |
-| SQLite | Insert 20,000 rows, then sum them | 123 ms | 88 ms | 1.4× slower |
-| Maps | Insert 50,000 keys, then look each one up | 91 ms | 67 ms | 1.4× slower |
-| Loops | 3,000,000 rounds of arithmetic | 924 ms | 477 ms | 1.9× slower |
-| JSON | Encode and decode 1,000 rows, 200 times | 768 ms | 282 ms | 2.7× slower |
-| Function calls | Recursive `fib(25)`, about 243,000 calls | 142 ms | 43 ms | 3.3× slower |
-| Objects | Create 400,000 objects and call methods on them | 704 ms | 108 ms | 6.5× slower |
+| Strings | Build a 130 KB string with 20,000 appends | 22 ms | 137 ms | 6.1× faster |
+| SQLite | Insert 20,000 rows, then sum them | 82 ms | 88 ms | 1.1× faster |
+| Maps | Insert 50,000 keys, then look each one up | 71 ms | 71 ms | The same |
+| Lists | Add 90,000 items, then read each one | 60 ms | 56 ms | 1.1× slower |
+| Loops | 3,000,000 rounds of arithmetic | 964 ms | 452 ms | 2.1× slower |
+| JSON | Encode and decode 1,000 rows, 200 times | 743 ms | 299 ms | 2.5× slower |
+| Function calls | Recursive `fib(25)`, about 243,000 calls | 151 ms | 46 ms | 3.3× slower |
+| Objects | Create 400,000 objects and call methods on them | 749 ms | 110 ms | 6.8× slower |
 
 Fubby starts in about 5 ms and Python in about 35 ms, which helps Fubby on short
 programs. Python's JSON module is written in C.
 
-0.2.0 changed the language without changing these numbers. Run one after the other,
-it took within 2% of 0.1.5's time on every program.
+Run one after the other with 0.2.0, 0.3.0 took 37% less time on SQLite, 30% less on
+maps, and 6 to 8% less on JSON and strings, because it shares strings instead of copying
+them and compiles each database statement once. Everything else was within 2%.
 
-**Web server.** With 4 workers, Snow answered a small JSON request 3,381 times a
-second, against 3,065 for Python's standard-library threading server, which isn't a
-production server. Snow's slowest 1% of requests took 3.9 ms, against 32 ms for
-Python. In a 20-minute test through JSON and SQLite, Snow served 914,497 requests with
-no errors, and its memory stayed flat at about 6 MB.
+**Web server.** With 4 workers, Snow answered a small JSON request 3,234 times a
+second, against 2,341 for Python's standard-library threading server, which isn't a
+production server. Snow's slowest 1% of requests took 4.2 ms, against 33 ms for Python.
+In a 20-minute test that made a new encrypted session on every request, Snow served
+1,809,372 requests with no errors, and its memory stayed flat at about 2.4 MB.
 
 ### Closing the gap
 
@@ -172,9 +177,30 @@ Next, we're working on:
 
 - fewer memory allocations for each function call and each object
 - reading each operator once, instead of comparing its text every time it runs
-- sharing strings instead of copying them every time they're read
+
+0.3.0 already shares strings instead of copying them every time they're read.
 
 We'll publish new numbers with every release.
+
+## What's new in 0.3.0
+
+0.3.0 gets web apps ready for a server. The language is the same as 0.2.0, but packages
+need `fubby = ">=0.3.0, <0.4.0"` in `fubby.toml`, and Snow has some new defaults. The
+[upgrade guide](UPGRADING_0.3.md), which is also in every download, lists them.
+
+- **Sessions and CSRF protection.** With `--secret-file`, `snow.session()` keeps a map
+  in an encrypted cookie, and requests that change something must carry the session's
+  CSRF token. See [Snow web application](#snow-web-application).
+- **Cookies, forms, uploads and redirects**: `snow.set_cookie`, `snow.form()`,
+  `snow.uploads()` and `snow.upload_save`, and `snow.redirect`.
+- **Behind a proxy.** `--trust-proxy` lets Snow know the visitor's address and that they
+  used HTTPS. Every response carries security headers.
+- **For running as a service**: JSON access logs, a health path, a clean stop on
+  SIGTERM, and up to 32 workers. `DEPLOYMENT.md`, in every download, is a tested guide
+  for nginx, Caddy and systemd.
+- **Passwords** hash with argon2id, through `moon.security.password_hash`. There's also
+  TCP for allowlisted hosts, SQLite backups, and host metrics.
+- **Faster**: maps 30% and SQLite 37% faster than 0.2.0.
 
 ## What's new in 0.2.0
 
@@ -278,19 +304,19 @@ language is the same as 0.1.1.
 The archive file in this repository is:
 
 ```text
-fubby-0.2.0-x86_64-apple-darwin.tar.gz
+fubby-0.3.0-x86_64-apple-darwin.tar.gz
 ```
 
 Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
 
 ```sh
-shasum -a 256 fubby-0.2.0-x86_64-apple-darwin.tar.gz
+shasum -a 256 fubby-0.3.0-x86_64-apple-darwin.tar.gz
 ```
 
 The expected value for this exact archive is:
 
 ```text
-87dbd82cf3492973e09fe1e1c5b72f9625382050845767b26a11fbfaddb491af
+61d9cec1d47d9a4a5b8be5ccfb6f00a68ce859f5ac04b293b1bef4f77dea7420
 ```
 
 Stop if the digest differs. A SHA-256 digest detects accidental changes only
@@ -303,8 +329,8 @@ The installer places only `fubby` in a user-owned prefix. It defaults to
 `$HOME/.local` and does not use `sudo`.
 
 ```sh
-tar -xzf fubby-0.2.0-x86_64-apple-darwin.tar.gz
-cd fubby-0.2.0-x86_64-apple-darwin
+tar -xzf fubby-0.3.0-x86_64-apple-darwin.tar.gz
+cd fubby-0.3.0-x86_64-apple-darwin
 ./install.sh
 export PATH="$HOME/.local/bin:$PATH"
 fubby --version
@@ -423,12 +449,21 @@ Options:
   --max-response-bytes <1..10485760>
   --max-requests <1..1000000>
   --shutdown-file <absent-file>
-  --workers <1..8>
-  --queue-capacity <1..64>
+  --workers <1..32>
+  --queue-capacity <1..1024>
+  --trust-proxy <addresses or ranges, such as 127.0.0.1,10.0.0.0/8>
+  --hsts
+  --secret-file <file>  (or FUBBY_SNOW_SECRET_FILE)
+  --session-cookie <name> --session-idle-s <seconds> --session-max-s <seconds>
+  --max-upload-bytes <1..1073741824> --upload-dir <folder> --upload-timeout-ms <ms>
+  --access-log <text|json|off> --health-path <path> --drain-timeout-ms <ms>
+
+fubby snow new-secret
 ```
 
-Defaults are `127.0.0.1:8080` and serial request handling. Snow is an
-experimental local development server.
+Defaults are `127.0.0.1:8080` and serial request handling. SIGTERM or Ctrl-C stops
+Snow cleanly. Snow has no HTTPS of its own: run it on 127.0.0.1 behind nginx or Caddy,
+as `DEPLOYMENT.md` in the download shows.
 
 ## Keywords
 
@@ -975,8 +1010,11 @@ fubby snow stop /tmp/fubby-stop.marker
 ```
 
 Snow also supports REST methods, static assets, request state, middleware,
-response helpers, and bounded worker/queue resources. It has no TLS or
-authentication and should remain on trusted local networks.
+response helpers, and bounded worker/queue resources. With `--secret-file` it keeps
+sessions in encrypted cookies and checks a CSRF token on every request that changes
+something; it also reads forms and uploads, and sets cookies. It has no HTTPS of its
+own, so put nginx or Caddy in front: `DEPLOYMENT.md` in the download has tested
+configs, and `examples/web_app` is a complete app with sign-in and uploads.
 
 ## Bela concurrency
 
@@ -1027,7 +1065,7 @@ manifest-version = 1
 [package]
 name = "app"
 version = "0.1.0"
-fubby = ">=0.2.0, <0.3.0"
+fubby = ">=0.3.0, <0.4.0"
 
 [dependencies]
 greeting = { version = "^0.1.0", path = "../greeting" }
@@ -1045,7 +1083,7 @@ with REST CRUD, SQLite, static assets, a reusable local package, Shady tests,
 Snow routes, and Bela request-scoped work. After extracting the archive:
 
 ```sh
-cp -R fubby-0.2.0-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
+cp -R fubby-0.3.0-x86_64-apple-darwin/starter-project "$HOME/fubby-fieldnotes"
 cd "$HOME/fubby-fieldnotes/app"
 fubby pkg validate
 fubby pkg install
@@ -1061,12 +1099,13 @@ and `.fubby/` under its app directory. Use a disposable copy for experiments.
 
 ## Security considerations and limitations
 
-- **It isn't safe on the internet yet.** Snow has no login, sessions, or CSRF
-  protection, there's no sandbox, and there's been no security audit.
+- **Put a proxy in front, and keep sensitive data off it for now.** Snow has sessions,
+  CSRF protection and security headers, but there's been no independent security audit
+  yet. It has no HTTPS of its own, so run it on 127.0.0.1 behind nginx or Caddy.
+- A copied session cookie works until it expires; signing out clears it only in that
+  browser, and changing Snow's secret ends every session.
 - Do not run untrusted Fubby source or packages.
 - There is no OS-level sandbox or hard OS heap quota.
-- Snow has no TLS or authentication/authorization; do not expose it to
-  untrusted networks or use it as a production server.
 - Resource limits and cancellation are runtime-level controls, not a security
   boundary against hostile code.
 - SHA-256 sidecars are unsigned and do not authenticate the publisher.
@@ -1087,9 +1126,9 @@ old for this build. Do not bypass macOS security prompts for untrusted artifacts
 The extracted bundle includes an optional archive-only smoke check:
 
 ```sh
-python3 fubby-0.2.0-x86_64-apple-darwin/smoke_test.py \
+python3 fubby-0.3.0-x86_64-apple-darwin/smoke_test.py \
   "$HOME/.local/bin/fubby" \
-  fubby-0.2.0-x86_64-apple-darwin/starter-project
+  fubby-0.3.0-x86_64-apple-darwin/starter-project
 ```
 
 It uses a temporary copy of the starter project and a local loopback server.
@@ -1097,7 +1136,7 @@ It uses a temporary copy of the starter project and a local loopback server.
 To uninstall only the installed executable:
 
 ```sh
-cd fubby-0.2.0-x86_64-apple-darwin
+cd fubby-0.3.0-x86_64-apple-darwin
 ./uninstall.sh
 ```
 
@@ -1126,7 +1165,7 @@ Fubby comes with no warranty. The interpreter's source code isn't public.
 
 ## Version compatibility
 
-The downloads are Fubby `0.2.0` for `x86_64-apple-darwin`,
+The downloads are Fubby `0.3.0` for `x86_64-apple-darwin`,
 `x86_64-unknown-linux-gnu`, and `x86_64-pc-windows-gnu`. Fubby is a 0.x preview;
 syntax and APIs may change. The source build uses Rust 1.98.1 and a locked
 dependency set, but binary users do not need Rust or Cargo. The packaged
