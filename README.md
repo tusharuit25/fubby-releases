@@ -307,7 +307,13 @@ The archive file in this repository is:
 fubby-0.3.0-x86_64-apple-darwin.tar.gz
 ```
 
-Download that file from the repository's file list to a local directory. Before extraction, compute SHA-256 on macOS:
+Download it from the repository's file list, or in Terminal:
+
+```sh
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/fubby-0.3.0-x86_64-apple-darwin.tar.gz
+```
+
+Before extraction, compute SHA-256 on macOS:
 
 ```sh
 shasum -a 256 fubby-0.3.0-x86_64-apple-darwin.tar.gz
