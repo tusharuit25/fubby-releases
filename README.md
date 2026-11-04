@@ -12,6 +12,9 @@ security audit, and is not production-ready.
 **Fubby is now available for Linux and Windows.** Get the
 [Linux build](#linux), or the [Windows beta](#windows-beta).
 
+**New: the [SCADA build](#scada-build)**, with serial, OPC UA and BACnet, for
+[FubbyScada](https://github.com/tusharuit25/fubbyscada), a SCADA system written in Fubby.
+
 **0.3.0 gets Snow ready to run on a server**, behind nginx or Caddy, with sessions,
 CSRF protection, uploads and a tested deployment guide. The language doesn't change, but
 packages need a new `fubby` range. See [What's new in 0.3.0](#whats-new-in-030) and the
@@ -136,6 +139,36 @@ projects.
 - your Windows version (run `winver`)
 - the output of `fubby --version`
 - the command you ran, and what happened
+
+## SCADA build
+
+The SCADA build is Fubby 0.3.0 with three more modules for industrial devices:
+`moon.serial`, `moon.opcua` and `moon.bacnet`. Everything else is the same as the standard
+download, so install it in its place. [FubbyScada](https://github.com/tusharuit25/fubbyscada),
+a SCADA system written in Fubby, uses all three.
+
+- OpenSSL, which OPC UA needs, is built in, so nothing else needs installing.
+- It's for macOS on Intel and Linux on x86-64 (glibc 2.34 or later). There's no Windows
+  SCADA build, because the serial module works only on macOS and Linux.
+- Its `SCADA.md` describes the three modules, and its `THIRD_PARTY_NOTICES.txt` lists the
+  components it adds, OpenSSL among them.
+
+| Computer | Download | SHA-256 |
+| --- | --- | --- |
+| macOS Intel | [`fubby-scada-0.3.0-x86_64-apple-darwin.tar.gz`](https://github.com/tusharuit25/fubby-releases/raw/main/scada/fubby-scada-0.3.0-x86_64-apple-darwin.tar.gz) | `99882919b8207e3072a75791594f891f3ccd133401e4e803f4cac52294fddc42` |
+| Linux x86-64 | [`fubby-scada-0.3.0-x86_64-unknown-linux-gnu.tar.gz`](https://github.com/tusharuit25/fubby-releases/raw/main/scada/fubby-scada-0.3.0-x86_64-unknown-linux-gnu.tar.gz) | `a6c4244a65e723c1d6b6453734615fed0c9eba2a344bd31db256420ceaad1a0d` |
+
+Download and check it as for the standard build, then install it from its folder. On Linux:
+
+```sh
+curl -LO https://github.com/tusharuit25/fubby-releases/raw/main/scada/fubby-scada-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+sha256sum fubby-scada-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+tar -xzf fubby-scada-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+cd fubby-scada-0.3.0-x86_64-unknown-linux-gnu
+./install.sh
+```
+
+On macOS, use `shasum -a 256` and the `x86_64-apple-darwin` file instead.
 
 ## Performance compared with Python
 
